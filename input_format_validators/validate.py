@@ -7,15 +7,25 @@ parser = argparse.ArgumentParser("blabla")
 parser.add_argument("--same", action="store_true", help="both integers are the same")
 args = parser.parse_args()
 
-firstline = sys.stdin.readline()
+randomNumber = input()
+amountOfCards = input()
 
-assert re.match("(0|-?[1-9][0-9]*) (0|-?[1-9][0-9]*)\n", firstline)
-x, y = map(int, firstline.split())
-assert -1000 <= x <= 1000
-assert -1000 <= y <= 1000
-if args.same:
-    assert x == y
+assert re.match(r"\d+", randomNumber)
+assert re.match(r"\d+", amountOfCards)
 
-assert sys.stdin.readline() == ""
+randomNumber = int(randomNumber)
+amountOfCards = int(amountOfCards)
+
+assert 1 <= randomNumber <= 1000000
+assert 1 <= amountOfCards <= 21
+
+for i in range(amountOfCards):
+    card = input()
+    assert re.match(r"\d+", card)
+    card = int(card)
+    assert 1 <= card <= 21
+
+
+assert sys.stdin.readline() == "" #This asserts that there is no more input
 
 sys.exit(42) # we're happy
