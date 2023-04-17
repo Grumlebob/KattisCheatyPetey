@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 """ Generate random input for CheatyPetey
-    Paramters:
+    Parameters:
     - loRandom, default 1
     - hiRandom, default 1.000.000
     - loCards, default 1
