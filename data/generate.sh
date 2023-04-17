@@ -15,7 +15,6 @@ compile gen_odd_rulecard.py
 compile gen_Specific_rulecard.py
 compile gen_Specific_case.py
 
-
 # there are two *.in files in data/sample
 samplegroup
 sample 1
@@ -27,11 +26,15 @@ sample 4
 #tc 1 # data/sample/2.in belongs here
 
 group even 20
+tc 3
 tc evenRulecard gen_even_rulecard --loRandom 1 --hiRandom 1000000 --loCards 1 --hiCards 21
 tc EvenRulecardImpossible gen_Specific_case --ruleCard 2 --cardsAvailable 5
 
 
 group odd 20
+tc 1
+tc 2
+tc 4
 tc oddRulecard gen_odd_rulecard --loRandom 1 --hiRandom 1000000 --loCards 1 --hiCards 21
 tc CatchesGreedyAlgorithm gen_Specific_case --ruleCard 1 --cardsAvailable 1 5 8 17
 
