@@ -35,11 +35,14 @@ group odd 25
 tc oddRulecard gen_odd_rulecard --loRandom 1 --hiRandom 1000000 --loCards 1 --hiCards 21
 
 
-group four 25
+group five 25
 tc FiveRulecard gen_Specific_rulecard --loCards 1 --hiCards 21 --ruleCard 5
 
 
 group two 25
+
+group three 12
+tc ruleCard3Impossible gen_Specific_case --ruleCard 3 --cardsAvailable 5 10 15 20
 
 tc smallNumbers1 gen_random --loRandom 1 --hiRandom 2 --loCards 1 --hiCards 5
 tc smallNumbers2 gen_random --loRandom 1 --hiRandom 10 --loCards 1 --hiCards 21
@@ -49,7 +52,6 @@ tc FiveRulecardImpossibleToHit gen_Specific_rulecard --loCards 1 --hiCards 3 --r
 tc ThreeRulecard gen_Specific_rulecard --loCards 1 --hiCards 21 --ruleCard 3
 tc CatchesGreedyAlgorithm gen_Specific_case --ruleCard 1 --cardsAvailable 1 5 8 17
 tc EvenRulecardImpossible gen_Specific_case --ruleCard 2 --cardsAvailable 5
-tc ruleCard3Impossible gen_Specific_case --ruleCard 3 --cardsAvailable 5 10 15 20
 tc ruleCard5Impossible gen_Specific_case --ruleCard 5 --cardsAvailable 1 2 3 4
 
 
