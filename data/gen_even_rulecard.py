@@ -35,6 +35,8 @@ lowestCards = args.loCards
 highestCards = args.hiCards
 
 randomNumber = random.randrange(lowestRandom, highestRandom + 1)
+while randomNumber % 2 == 1:
+    randomNumber = random.randrange(lowestRandom, highestRandom + 1)
 print(randomNumber)
 amountOfCards = random.randrange(lowestCards, highestCards + 1)
 print(amountOfCards)

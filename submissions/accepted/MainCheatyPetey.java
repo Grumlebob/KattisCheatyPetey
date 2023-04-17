@@ -87,14 +87,34 @@ public class MainCheatyPetey {
                 dp[currentTarget] = 0;
                 for (int currentCardValue : valuesAvailable) {
                     // If we don't overdraw.
-                    if (currentTarget - currentCardValue >= 0) {
+                    if (currentTarget - currentCardValue >= 0 && currentTarget + currentCardValue <= target + 1) {
                         // System.out.println("Current target:" + currentTarget + " Current card value:"
                         // + currentCardValue
                         // + " Current best solution:" + dp[currentTarget] + " New solution:"
                         // + dp[currentTarget - currentCardValue] + 1);
                         dp[currentTarget] = Math.max(dp[currentTarget], dp[currentTarget - currentCardValue] + 1);
+                        // System.out.println(dp[currentTarget]);
                     }
                 }
+            }
+            // Lowest card is 1, so if dp[target] is above our target, we can't reach it, as
+            // value was never changed from MAX_VALUE.
+            if (abs(dp[target]) == 0) {
+                System.out.println("Impossible");
+            } else {
+                System.out.println(dp[target]);
+                // Print the different cards used
+                // System.out.println("Cards used:");
+                // int x = target;
+                // while (x > 0) {
+                // for (var c : valuesAvailable) {
+                // if (x - c >= 0 && dp[x] == dp[x - c] + 1) {
+                // System.out.println(c);
+                // x -= c;
+                // break;
+                // }
+                // }
+                // }
             }
 
         } else if (ruleCard == 5)
@@ -162,6 +182,27 @@ public class MainCheatyPetey {
                 }
             }
 
+            // Lowest card is 1, so if dp[target] is above our target, we can't reach it, as
+            // value was never changed from MAX_VALUE.
+            if (abs(dp[target]) > target) {
+                System.out.println("Impossible");
+            } else {
+                // System.out.println("Minimum cards:");
+                System.out.println(dp[target]);
+                //// Print the different cards used
+                // System.out.println("Cards used:");
+                // int x = target;
+                // while (x > 0) {
+                // for (var c : valuesAvailable) {
+                // if (x - c >= 0 && dp[x] == dp[x - c] + 1) {
+                // System.out.println(c);
+                // x -= c;
+                // break;
+                // }
+                // }
+                // }
+            }
+
         }
         // Base case is if we need to hit target 0, we can do so with 0 cards.
 
@@ -170,26 +211,7 @@ public class MainCheatyPetey {
         // for (int i = 0; i < dp.length; i++) {
         // System.out.println("dp[" + i + "] = " + dp[i]);
         // }
-        // Lowest card is 1, so if dp[target] is above our target, we can't reach it, as
-        // value was never changed from MAX_VALUE.
-        if (abs(dp[target]) > target) {
-            System.out.println("Impossible");
-        } else {
-            // System.out.println("Minimum cards:");
-            System.out.println(dp[target]);
-            //// Print the different cards used
-            // System.out.println("Cards used:");
-            // int x = target;
-            // while (x > 0) {
-            // for (var c : valuesAvailable) {
-            // if (x - c >= 0 && dp[x] == dp[x - c] + 1) {
-            // System.out.println(c);
-            // x -= c;
-            // break;
-            // }
-            // }
-            // }
-        }
+
         // Print runtime in milliseconds
         // System.out.println("Runtime: " + (System.nanoTime() - startTime)/1000000 +
         // "ms");
