@@ -120,18 +120,21 @@ public class MainCheatyPetey {
         } else if (ruleCard == 5)
         // Only 5 of each card
         {
-            var aux = new MultiSet<Integer>();
-            for (var val : valuesAvailable) {
-                aux.add(val, 5);
+            @SuppressWarnings("unchecked") //java doesn't like arrays of generics
+            MultiSet<Integer>[] valuesAvailableFrom = new MultiSet[dp.length];
+            for (int i = 0; i < valuesAvailableFrom.length; i++) {
+                var aux = new MultiSet<Integer>();
+                for (var val : valuesAvailable) {
+                    aux.add(val, 5);
+                }
+                valuesAvailableFrom[i] = aux; //for target i you have x cards to pick from
             }
-            valuesAvailable = aux;
             dp[0] = 0;
             for (int currentTarget = 1; currentTarget <= target; currentTarget++) {
                 // Initialize every current best solution to Max value, as that is clearly worse
                 // than any other solution.
                 dp[currentTarget] = target + 99999;
                 for (int currentCardValue : valuesAvailable) {
-                    if (valuesAvailable.numberOf(currentCardValue) == 0) continue; //to make sure we don't use removed cards.
                     // If we don't overdraw.
                     if (currentTarget - currentCardValue >= 0) {
                         // System.out.println("Current target:" + currentTarget + " Current card value:"
@@ -142,8 +145,8 @@ public class MainCheatyPetey {
                         // to our target.
                         // If our previous solution, plus drawing an extra card, is better than our
                         // current best solution, we update it.
-                        if (dp[currentTarget - currentCardValue] + 1 < dp[currentTarget]) {
-                            valuesAvailable.remove(currentCardValue);
+                        if (dp[currentTarget - currentCardValue] + 1 < dp[currentTarget] && valuesAvailableFrom[currentTarget - currentCardValue].numberOf(currentCardValue) > 0) {
+                            valuesAvailableFrom[currentTarget].remove(currentCardValue);
                             dp[currentTarget] = dp[currentTarget - currentCardValue] + 1;
                         } 
                         else {
@@ -157,13 +160,21 @@ public class MainCheatyPetey {
         else if (ruleCard == 3) 
         // Only 1 of each card
         {
+            @SuppressWarnings("unchecked") //java doesn't like arrays of generics
+            MultiSet<Integer>[] valuesAvailableFrom = new MultiSet[dp.length];
+            for (int i = 0; i < valuesAvailableFrom.length; i++) {
+                var aux = new MultiSet<Integer>();
+                for (var val : valuesAvailable) {
+                    aux.add(val);
+                }
+                valuesAvailableFrom[i] = aux; //for target i you have x cards to pick from
+            }
             dp[0] = 0;
             for (int currentTarget = 1; currentTarget <= target; currentTarget++) {
                 // Initialize every current best solution to Max value, as that is clearly worse
                 // than any other solution.
                 dp[currentTarget] = target + 99999;
                 for (int currentCardValue : valuesAvailable) {
-                    if (valuesAvailable.numberOf(currentCardValue) == 0) continue; //to make sure we don't use removed cards.
                     // If we don't overdraw.
                     if (currentTarget - currentCardValue >= 0) {
                         // System.out.println("Current target:" + currentTarget + " Current card value:"
@@ -174,8 +185,8 @@ public class MainCheatyPetey {
                         // to our target.
                         // If our previous solution, plus drawing an extra card, is better than our
                         // current best solution, we update it.
-                        if (dp[currentTarget - currentCardValue] + 1 < dp[currentTarget]) {
-                            valuesAvailable.remove(currentCardValue);
+                        if (dp[currentTarget - currentCardValue] + 1 < dp[currentTarget] && valuesAvailableFrom[currentTarget - currentCardValue].numberOf(currentCardValue) > 0) {
+                            valuesAvailableFrom[currentTarget].remove(currentCardValue);
                             dp[currentTarget] = dp[currentTarget - currentCardValue] + 1;
                         } 
                         else {
