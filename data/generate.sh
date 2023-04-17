@@ -14,6 +14,7 @@ compile gen_explicit.py
 compile gen_even_rulecard.py
 compile gen_odd_rulecard.py
 compile gen_Specific_rulecard.py
+compile gen_Specific_case.py
 
 
 # there are two *.in files in data/sample
@@ -33,5 +34,9 @@ tc oddRulecard gen_odd_rulecard --loRandom 1 --hiRandom 1000000 --loCards 1 --hi
 tc FiveRulecard gen_Specific_rulecard --loCards 1 --hiCards 21 --ruleCard 5
 tc FiveRulecardImpossibleToHit gen_Specific_rulecard --loCards 1 --hiCards 3 --ruleCard 5
 tc ThreeRulecard gen_Specific_rulecard --loCards 1 --hiCards 21 --ruleCard 3
+tc CatchesGreedyAlgorithm gen_Specific_case --ruleCard 1 --cardsAvailable 1 5 8 17
+tc EvenRulecardImpossible gen_Specific_case --ruleCard 2 --cardsAvailable 5
+
+
 
 
