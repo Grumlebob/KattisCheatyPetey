@@ -7,12 +7,16 @@ import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
 public class MainCheatyPetey {
-    private static class MultiSet<T> implements Iterable<T>{
+    private static class MultiSet<T> implements Iterable<T>, Cloneable{
         
         private HashMap<T, Integer> ms;
 
         public MultiSet() {
             ms = new HashMap<>();
+        }
+
+        private MultiSet(HashMap<T, Integer> init) {
+            ms = init;
         }
 
         public void add(T obj, int amount) {
@@ -51,6 +55,12 @@ public class MainCheatyPetey {
                 }
             }
             return list.iterator();
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public MultiSet<T> clone() {
+            return new MultiSet<T>((HashMap<T, Integer>)ms.clone());
         }
     }
     public static void main(String[] args) {
@@ -146,6 +156,7 @@ public class MainCheatyPetey {
                         // If our previous solution, plus drawing an extra card, is better than our
                         // current best solution, we update it.
                         if (dp[currentTarget - currentCardValue] + 1 < dp[currentTarget] && valuesAvailableFrom[currentTarget - currentCardValue].numberOf(currentCardValue) > 0) {
+                            valuesAvailableFrom[currentTarget] = valuesAvailableFrom[currentTarget - currentCardValue].clone();
                             valuesAvailableFrom[currentTarget].remove(currentCardValue);
                             dp[currentTarget] = dp[currentTarget - currentCardValue] + 1;
                         } 
@@ -205,6 +216,7 @@ public class MainCheatyPetey {
                         // If our previous solution, plus drawing an extra card, is better than our
                         // current best solution, we update it.
                         if (dp[currentTarget - currentCardValue] + 1 < dp[currentTarget] && valuesAvailableFrom[currentTarget - currentCardValue].numberOf(currentCardValue) > 0) {
+                            valuesAvailableFrom[currentTarget] = valuesAvailableFrom[currentTarget - currentCardValue].clone();
                             valuesAvailableFrom[currentTarget].remove(currentCardValue);
                             dp[currentTarget] = dp[currentTarget - currentCardValue] + 1;
                         } 
