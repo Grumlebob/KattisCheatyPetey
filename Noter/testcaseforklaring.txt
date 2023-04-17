@@ -39,7 +39,7 @@
 19
 21
 
-- Secret - Tester rulecard 3, impossible - Target 63, and if all cards are used 50 will be reachable
+- tc ruleCard3Impossible gen_Specific_case --ruleCard 3 --cardsAvailable 5 10 15 20 - Tester rulecard 3, impossible - Target 63, and if all cards are used 50 will be reachable
 3
 4
 5
@@ -47,10 +47,10 @@
 15
 20
 
+Tester rulecard 5, muligt:
 
-Tester rulecard 5, muligt
 
-Tester rulecard 5, impossible - Target to hit is 105, and if all cards are used 75 will be reachable.
+- tc ruleCard5Impossible gen_Specific_case --ruleCard 5 --cardsAvailable 1 2 3 4 - Tester rulecard 5, impossible - Target to hit is 105, and if all cards are used 75 will be reachable.
 5
 4
 1
