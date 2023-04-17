@@ -1,4 +1,23 @@
-Tester rulecard odd, muligt
+- 1.in Tester rulecard odd, muligt - 3
+1
+2
+3
+7
+
+- tc specificCaseCatchesGreedyAlgorithm gen_Specific_case --ruleCard 1 --cardsAvailable 1 5 8 17 - Tester rulecard odd, muligt - 3 - frasorterer greedy. - 
+1
+4
+1
+5
+8
+17
+
+- 2.in Tester rulecard odd, impossible 
+1
+1
+6
+
+- 3.in Tester rulecard even, muligt - Answer 1*42 - Så de forstår vores "rulecard table" at de ikke skal tage 2*21 her
 2
 5
 1
@@ -7,7 +26,34 @@ Tester rulecard odd, muligt
 11
 21
 
-Tester rulecard odd, impossible
+- tc EvenRulecardImpossible gen_Specific_case --ruleCard 2 --cardsAvailable 5 - Tester rulecard even, impossible 
 2
 1
 5
+
+- 4.in - Tester rulecard 3, muligt
+3
+4
+18
+5
+19
+21
+
+- Secret - Tester rulecard 3, impossible - Target 63, and if all cards are used 50 will be reachable
+3
+4
+5
+10
+15
+20
+
+
+Tester rulecard 5, muligt
+
+Tester rulecard 5, impossible - Target to hit is 105, and if all cards are used 75 will be reachable.
+5
+4
+1
+2
+3
+4

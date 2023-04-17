@@ -20,6 +20,8 @@ parser.add_argument("seed", type=int, help="seed")
 parser.add_argument("--loCards", type=int, default=1, help="smallest integer")
 parser.add_argument("--hiCards", type=int, default=21, help="largest integer")
 parser.add_argument("--ruleCard", type=int, default=5, help="Rulecard")
+
+
 args = parser.parse_args()
 
 random.seed(args.seed)
