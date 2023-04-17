@@ -53,6 +53,7 @@ tc ThreeRulecard gen_Specific_rulecard --loCards 1 --hiCards 21 --ruleCard 3
 tc CatchesGreedyAlgorithm gen_Specific_case --ruleCard 1 --cardsAvailable 1 5 8 17
 tc EvenRulecardImpossible gen_Specific_case --ruleCard 2 --cardsAvailable 5
 tc ruleCard5Impossible gen_Specific_case --ruleCard 5 --cardsAvailable 1 2 3 4
+tc ruleCard5Possible gen_Specific_case --ruleCard 5 --cardsAvailable 18 8 5
 
 
 
