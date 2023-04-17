@@ -1,19 +1,30 @@
 \problemname{Cheaty Petey}
 \illustration{.33}{img/ace-up-your-sleeve.jpg}{Image: SIphotography/iStock/Getty Images Plus/Getty}
 
-Læg to tal sammen.
+After already been kicked out of several casinos, Cheaty Petey is hungry to win some money in blackjack. Luckily a new casino just opened up, “The Rulebreaker”, that has no previous track record of Petey cheating with his card duplication sleeves.
 
-\section*{Indlæsning}
+With his magnificent sleeves, Petey is able to produce as many cards, of the variant he already brought with him. Last time Petey got caught cheating, he brought a full deck with him, but this time he has learned from his mistakes. Petey will only bring a few different cards this time, and will follow certain rules, in order to minimize getting caught.
 
-To heltal $x$ og $y$ på samme linje, adskilte af et enkelt mellemrum.
-Du kan antage $-1000\leq x \leq 1000$ og
-$-1000\leq y \leq 1000$.
+On the opening night of The Rulebreaker, they play a special variant of Blackjack, where all the cards are numbered 1 to 21 and where a random number is chosen before each game, which specifies what rules to follow in order to win. 
 
-\section*{Udskrift}
+Based on the number on the rule card, you will have to follow certain criteria. Notice that all criteria that the rule card meets must be followed (if r = 4 then also r is even). 
+\begin{table}[]
+    \begin{tabular}{ll}
+    \textbf{Any rule card} & \textbf{Target to hit is 21 multiplied with the rule card value} \\
+    If rule cards is even & Then you must output the lowest amount of cards to win  \\
+    If rule card is odd   & Then you must output the highest amount of cards to win \\
+    Rule card = 4         & You may only use 4 of each cards                        \\
+    Rule card = 2         & You may only use one of each card                      
+    \end{tabular}
+\end{table}
 
-Et enkelt heltal: $x+y$.
+\section*{Input}
+The first line consist of one integer $R$, the rule card drawn before the game, where 
+$1\leq R \leq 1.000.000$
 
-\section*{Pointsætning}
 
-Der er to testgrupper, hver med 50 point.
-I den første testgruppe er $x=y$.
+
+The second line consist of one integer $N$, the number of different card values Cheaty Petey can produce, being $1\leq N \leq 21$. Following are $N$ lines, with the unique different values Cheaty Petey can produce.
+
+\section*{Output}
+If target is impossible to hit, print "Impossible". Otherwise, print the number of cards Petey needs to draw to hit the target.

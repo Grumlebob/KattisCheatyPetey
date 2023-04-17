@@ -11,8 +11,8 @@ public class MainCheatyPetey {
         //long startTime = System.nanoTime();
 
         Scanner scanner = new Scanner(System.in);
-        int firstRandomNumber = scanner.nextInt();
-        int target = firstRandomNumber * 21;
+        int ruleCard = scanner.nextInt();
+        int target = ruleCard * 21;
         int numberOfDifferentCardValues = scanner.nextInt();
 
         ArrayList<Integer> valuesAvailable = new ArrayList<>();
@@ -25,6 +25,26 @@ public class MainCheatyPetey {
 
         //Dynamic programming coin change problem variant, casino themed.
         int[] dp = new int[target+1];
+
+        if (ruleCard%2 == 1) {
+            //ODD: highest amount of cards
+            
+        }
+        else if (ruleCard == 4 )
+        //Only 4 of each card
+
+        {
+
+        }
+        else if (ruleCard == 2 )
+        {
+            //Only 1 of each card
+
+        }
+        else if (ruleCard%2 == 0) {
+            //EVEN: lowest amount of cards
+        }
+        
         //Base case is if we need to hit target 0, we can do so with 0 cards.
         dp[0] = 0;
         for (int currentTarget = 1; currentTarget <= target; currentTarget++) {
