@@ -1,0 +1,13 @@
+Tester rulecard odd, muligt
+2
+5
+1
+2
+5
+11
+21
+
+Tester rulecard odd, impossible
+2
+1
+5
