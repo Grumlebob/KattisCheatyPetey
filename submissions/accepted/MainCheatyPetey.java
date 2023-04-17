@@ -155,7 +155,26 @@ public class MainCheatyPetey {
                     }
                 }
             }
-
+            // Lowest card is 1, so if dp[target] is above our target, we can't reach it, as
+            // value was never changed from MAX_VALUE.
+            if (abs(dp[target]) > target) {
+                System.out.println("Impossible");
+            } else {
+                // System.out.println("Minimum cards:");
+                System.out.println(dp[target]);
+                //// Print the different cards used
+                // System.out.println("Cards used:");
+                // int x = target;
+                // while (x > 0) {
+                // for (var c : valuesAvailable) {
+                // if (x - c >= 0 && dp[x] == dp[x - c] + 1) {
+                // System.out.println(c);
+                // x -= c;
+                // break;
+                // }
+                // }
+                // }
+            }
         } 
         else if (ruleCard == 3) 
         // Only 1 of each card
@@ -194,6 +213,26 @@ public class MainCheatyPetey {
                         }
                     }
                 }
+            }
+            // Lowest card is 1, so if dp[target] is above our target, we can't reach it, as
+            // value was never changed from MAX_VALUE.
+            if (abs(dp[target]) > target) {
+                System.out.println("Impossible");
+            } else {
+                // System.out.println("Minimum cards:");
+                System.out.println(dp[target]);
+                //// Print the different cards used
+                // System.out.println("Cards used:");
+                // int x = target;
+                // while (x > 0) {
+                // for (var c : valuesAvailable) {
+                // if (x - c >= 0 && dp[x] == dp[x - c] + 1) {
+                // System.out.println(c);
+                // x -= c;
+                // break;
+                // }
+                // }
+                // }
             }
         }
 
