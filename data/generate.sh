@@ -33,14 +33,12 @@ tc oddRulecard gen_odd_rulecard --loRandom 1 --hiRandom 1000000 --loCards 1 --hi
 tc catchesGreedyAlgorithm gen_Specific_case --ruleCard 1 --cardsAvailable 1 5 8 17
 
 
-group three 20
 tc threeRulecard gen_Specific_rulecard --loCards 1 --hiCards 21 --ruleCard 3
 tc threeRulecardImpossibleToHit gen_Specific_rulecard --loCards 1 --hiCards 10 --ruleCard 3
 tc threeRuleCardImpossible gen_Specific_case --ruleCard 3 --cardsAvailable 5 10 15 20
 tc threeRuleCardPossible gen_Specific_case --ruleCard 5 --cardsAvailable 2 7 9 20 12 10 5 8
 
 
-group five 20
 tc fiveRulecard gen_Specific_rulecard --loCards 1 --hiCards 21 --ruleCard 5
 tc fiveRulecardImpossibleToHit gen_Specific_rulecard --loCards 1 --hiCards 3 --ruleCard 5
 tc fiveRuleCardImpossible gen_Specific_case --ruleCard 5 --cardsAvailable 1 2 3 4
