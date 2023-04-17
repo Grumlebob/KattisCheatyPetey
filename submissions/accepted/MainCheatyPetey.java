@@ -26,41 +26,42 @@ public class MainCheatyPetey {
         //Dynamic programming coin change problem variant, casino themed.
         int[] dp = new int[target+1];
 
-        if (ruleCard%2 == 1) {
-            //ODD: highest amount of cards
-            
+
+        if (ruleCard%2 == 0) {
+                    //EVEN: highest amount of cards
         }
-        else if (ruleCard == 4 )
-        //Only 4 of each card
+        else if (ruleCard == 5 )
+        //Only 5 of each card
 
         {
 
         }
-        else if (ruleCard == 2 )
+        else if (ruleCard == 3 )
         {
             //Only 1 of each card
 
         }
-        else if (ruleCard%2 == 0) {
-            //EVEN: lowest amount of cards
-        }
-        
-        //Base case is if we need to hit target 0, we can do so with 0 cards.
-        dp[0] = 0;
-        for (int currentTarget = 1; currentTarget <= target; currentTarget++) {
-            //Initialize every current best solution to Max value, as that is clearly worse than any other solution.
-            dp[currentTarget] = target+99999;
-            for (int currentCardValue : valuesAvailable) {
-                //If we don't overdraw.
-                if (currentTarget-currentCardValue >= 0) {
-                    //System.out.println("Current target:" + currentTarget + " Current card value:" + currentCardValue + " Current best solution:" + dp[currentTarget] + " New solution:" + dp[currentTarget-currentCardValue]+1);
-                    //The best solution is the one with fewest amount of cards drawn.
-                    //We are doing bottom-up, checking every possible solution from 1 all the way to our target.
-                    //If our previous solution, plus drawing an extra card, is better than our current best solution, we update it.
-                    dp[currentTarget] = min(dp[currentTarget], dp[currentTarget-currentCardValue]+1);
+    
+        else if (ruleCard%2 == 1) {
+            //ODD: lowest amount of cards
+            dp[0] = 0;
+            for (int currentTarget = 1; currentTarget <= target; currentTarget++) {
+                //Initialize every current best solution to Max value, as that is clearly worse than any other solution.
+                dp[currentTarget] = target+99999;
+                for (int currentCardValue : valuesAvailable) {
+                    //If we don't overdraw.
+                    if (currentTarget-currentCardValue >= 0) {
+                        //System.out.println("Current target:" + currentTarget + " Current card value:" + currentCardValue + " Current best solution:" + dp[currentTarget] + " New solution:" + dp[currentTarget-currentCardValue]+1);
+                        //The best solution is the one with fewest amount of cards drawn.
+                        //We are doing bottom-up, checking every possible solution from 1 all the way to our target.
+                        //If our previous solution, plus drawing an extra card, is better than our current best solution, we update it.
+                        dp[currentTarget] = min(dp[currentTarget], dp[currentTarget-currentCardValue]+1);
+                    }
                 }
             }
+            
         }
+        //Base case is if we need to hit target 0, we can do so with 0 cards.
 
         //print all DP 
         //For pushing.
