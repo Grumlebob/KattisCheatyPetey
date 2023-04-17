@@ -1,10 +1,55 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
 public class MainCheatyPetey {
+    private class MultiSet<T> implements Iterable<T>{
+        
+        private HashMap<T, Integer> ms;
+
+        public MultiSet() {
+            ms = new HashMap<>();
+        }
+
+        public void add(T obj, int amount) {
+            var count = numberOf(obj);
+            ms.put(obj, count + amount);
+        }
+
+        public void add(T obj) {
+            add(obj, 1);
+        }
+
+
+        public void remove(T obj) {
+            var count = numberOf(obj);
+            if (count < 2) {
+                ms.remove(obj);
+            } else {
+                ms.put(obj, count - 1);
+            }
+        }
+
+        public int numberOf(T obj) {
+            var count = ms.get(obj);
+            return count == null ? 0 : count;
+        }
+
+        @Override
+        public Iterator<T> iterator() {
+            var list = new ArrayList<T>();
+            for (T obj : ms.keySet()) {
+                for (int i = numberOf(obj); i > 0; i--) {
+                    list.add(obj);
+                }
+            }
+            return list.iterator();
+        }
+    }
     public static void main(String[] args) {
 
         // Get runtime
@@ -15,7 +60,7 @@ public class MainCheatyPetey {
         int target = ruleCard * 21;
         int numberOfDifferentCardValues = scanner.nextInt();
 
-        ArrayList<Integer> valuesAvailable = new ArrayList<>();
+        MultiSet<Integer> valuesAvailable = new MainCheatyPetey().new MultiSet<>();
         for (int i = 0; i < numberOfDifferentCardValues; i++) {
             valuesAvailable.add(scanner.nextInt());
         }
