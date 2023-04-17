@@ -40,6 +40,7 @@ group three 20
 tc threeRulecard gen_Specific_rulecard --loCards 1 --hiCards 21 --ruleCard 3
 tc threeRulecardImpossibleToHit gen_Specific_rulecard --loCards 1 --hiCards 10 --ruleCard 3
 tc threeRuleCardImpossible gen_Specific_case --ruleCard 3 --cardsAvailable 5 10 15 20
+tc threeRuleCardPossible gen_Specific_case --ruleCard 5 --cardsAvailable 2 7 9 20 12 10 5 8
 
 
 group five 20
