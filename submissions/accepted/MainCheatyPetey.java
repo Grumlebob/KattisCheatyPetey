@@ -7,7 +7,7 @@ import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
 public class MainCheatyPetey {
-    private class MultiSet<T> implements Iterable<T>{
+    private static class MultiSet<T> implements Iterable<T>{
         
         private HashMap<T, Integer> ms;
 
@@ -24,14 +24,17 @@ public class MainCheatyPetey {
             add(obj, 1);
         }
 
-
-        public void remove(T obj) {
+        public void remove(T obj, int amount) {
             var count = numberOf(obj);
-            if (count < 2) {
+            if (count <= amount) {
                 ms.remove(obj);
             } else {
-                ms.put(obj, count - 1);
+                ms.put(obj, count - amount);
             }
+        }
+
+        public void remove(T obj) {
+            remove(obj, 1);
         }
 
         public int numberOf(T obj) {
@@ -60,7 +63,7 @@ public class MainCheatyPetey {
         int target = ruleCard * 21;
         int numberOfDifferentCardValues = scanner.nextInt();
 
-        MultiSet<Integer> valuesAvailable = new MainCheatyPetey().new MultiSet<>();
+        MultiSet<Integer> valuesAvailable = new MultiSet<>();
         for (int i = 0; i < numberOfDifferentCardValues; i++) {
             valuesAvailable.add(scanner.nextInt());
         }
@@ -97,8 +100,41 @@ public class MainCheatyPetey {
         } else if (ruleCard == 5)
         // Only 5 of each card
         {
+            var aux = new MultiSet<Integer>();
+            for (var val : valuesAvailable) {
+                aux.add(val, 5);
+            }
+            valuesAvailable = aux;
+            dp[0] = 0;
+            for (int currentTarget = 1; currentTarget <= target; currentTarget++) {
+                // Initialize every current best solution to Max value, as that is clearly worse
+                // than any other solution.
+                dp[currentTarget] = target + 99999;
+                for (int currentCardValue : valuesAvailable) {
+                    if (valuesAvailable.numberOf(currentCardValue) == 0) continue; //to make sure we don't use removed cards.
+                    // If we don't overdraw.
+                    if (currentTarget - currentCardValue >= 0) {
+                        // System.out.println("Current target:" + currentTarget + " Current card value:"
+                        // + currentCardValue + " Current best solution:" + dp[currentTarget] + " New
+                        // solution:" + dp[currentTarget-currentCardValue]+1);
+                        // The best solution is the one with fewest amount of cards drawn.
+                        // We are doing bottom-up, checking every possible solution from 1 all the way
+                        // to our target.
+                        // If our previous solution, plus drawing an extra card, is better than our
+                        // current best solution, we update it.
+                        if (dp[currentTarget - currentCardValue] + 1 < dp[currentTarget]) {
+                            valuesAvailable.remove(currentCardValue);
+                            dp[currentTarget] = dp[currentTarget - currentCardValue] + 1;
+                        } 
+                        else {
+                            dp[currentTarget] = dp[currentTarget];
+                        }
+                    }
+                }
+            }
 
-        } else if (ruleCard == 3) {
+        } 
+        else if (ruleCard == 3) {
             // Only 1 of each card
 
         }
