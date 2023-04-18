@@ -72,7 +72,7 @@ public class MainCheatyPetey {
 
         MultiSet<Integer> valuesAvailable = new MultiSet<>();
         for (int i = 0; i < numberOfDifferentCardValues; i++) {
-            valuesAvailable.add(scanner.nextInt());
+            valuesAvailable.add(scanner.nextInt(), 1);
         }
 
         // System.out.println("target: " + target);
