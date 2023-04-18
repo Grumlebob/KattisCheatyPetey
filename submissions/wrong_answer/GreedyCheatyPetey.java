@@ -70,12 +70,6 @@ public class GreedyCheatyPetey {
         if (ruleCard % 2 == 0) {
             // EVEN: highest amount of cards
 
-            if (true) {
-                System.out.println("Impossible");
-            } else {
-                System.out.println("coins used:");
-            }
-
         } else if (ruleCard == 5)
         // Only 5 of each card
         {
@@ -124,7 +118,7 @@ public class GreedyCheatyPetey {
             for (int i = 0; i < numberOfDifferentCardValues; i++) {
                 valuesAvailable.add(scanner.nextInt());
             }
-            // Sort valuesAvailable with highest value first
+            // Sorted by highest value first
             valuesAvailable.sort((a, b) -> b - a);
 
             int currentTarget = target;
@@ -133,6 +127,9 @@ public class GreedyCheatyPetey {
                 while (currentTarget - value >= 0) {
                     currentTarget -= value;
                     cardsUsedCounter++;
+                    if (currentTarget == 0) {
+                        break;
+                    }
                 }
             }
 

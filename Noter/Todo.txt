@@ -1,6 +1,6 @@
 Accepted solution i forskellige sprog
 
-Accepted solution med reccursion
+Accepted solution med reccursion (måske kræves det at recursion limit sættes op, test både uden og med)
 
 Submissions/run_time_error: Recusion limit exceeded i python
 
