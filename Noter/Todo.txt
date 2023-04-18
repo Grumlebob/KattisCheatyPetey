@@ -1,0 +1,11 @@
+Accepted solution i forskellige sprog
+
+Accepted solution med reccursion
+
+Submissions/run_time_error: Recusion limit exceeded i python
+
+Rapport.
+
+Wrong answer, greedy.
+
+Time limit exceeded: bruteforce.
