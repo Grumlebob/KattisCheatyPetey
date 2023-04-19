@@ -6,7 +6,7 @@ import java.util.Scanner;
 import static java.lang.Math.abs;
 import static java.lang.Math.min;
 
-public class MainCheatyPetey {
+public class BruteForceCheatyPetey {
     private static class MultiSet<T> implements Iterable<T>, Cloneable {
 
         private HashMap<T, Integer> ms;

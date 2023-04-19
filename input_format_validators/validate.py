@@ -10,8 +10,8 @@ args = parser.parse_args()
 randomNumber = input()
 amountOfCards = input()
 
-assert re.match(r"\d+", randomNumber)
-assert re.match(r"\d+", amountOfCards)
+assert re.fullmatch(r"[1-9][0-9]*\r?", randomNumber)
+assert re.fullmatch(r"[1-9][0-9]*\r?", amountOfCards)
 
 randomNumber = int(randomNumber)
 amountOfCards = int(amountOfCards)
@@ -21,7 +21,7 @@ assert 1 <= amountOfCards <= 21
 
 for i in range(amountOfCards):
     card = input()
-    assert re.match(r"\d+", card)
+    assert re.fullmatch(r"[1-9][0-9]*\r?", card)
     card = int(card)
     assert 1 <= card <= 21
 
