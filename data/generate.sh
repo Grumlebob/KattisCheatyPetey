@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USE_SCORING=100 #Pass-fail problem.
+# USE_SCORING=100 #Pass-fail problem.
 # run this as ./generate.sh from the data directory. It populates data/secret
 
 . ../../_testdata_tools/gen.sh
