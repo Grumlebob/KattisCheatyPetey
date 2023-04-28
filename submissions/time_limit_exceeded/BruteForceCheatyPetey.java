@@ -155,7 +155,6 @@ public class BruteForceCheatyPetey {
 
         else if (ruleCard % 2 == 1) {
             // ODD: lowest amount of cards
-
         }
 
     }
