@@ -48,8 +48,6 @@
 20
 
 Tester rulecard 5, muligt:
-
-
 - tc ruleCard5Impossible gen_Specific_case --ruleCard 5 --cardsAvailable 1 2 3 4 - Tester rulecard 5, impossible - Target to hit is 105, and if all cards are used 75 will be reachable.
 5
 4
@@ -57,3 +55,36 @@ Tester rulecard 5, muligt:
 2
 3
 4
+
+- 5.in - Tester rulecard 5 er muligt
+Result when running greedy and DP:
+
+Input	Target	Result	Cards   used:	Sum
+5		105				
+7						
+1		5		Used  1: 5	    0	    0
+2		10		Used  2: 5	    0	    0
+3		15		Used  3: 4	    1	    3
+4		20		Used  4: 2	    3	    12
+5		25		Used  5: 0	    5	    25
+6		30		Used  6: 0	    5	    30
+7		35		Used  7: 0	    5	    35
+					            19	    105
+
+
+6.in Tester rulecard 3 er muligt, og DP vælger bedre end greedy
+3 Rule example				
+Input		Target		Greedy will choose 6 cards
+3		    63		    21
+8				        20
+1				        15
+2				        1
+4				        2
+8				        4
+14				
+15				        DP wil choose 4 cards
+20				        21
+21				        20
+				        14
+				        8
+

@@ -21,6 +21,8 @@ sample 1
 sample 2
 sample 3
 sample 4
+sample 5
+sample 6
 
 # generate tests here
 #tc 1 # data/sample/2.in belongs here
@@ -40,11 +42,13 @@ tc CatchesGreedyAlgorithm gen_Specific_case --ruleCard 1 --cardsAvailable 1 5 8 
 
 
 group three 20
+tc 6
 tc ruleCard3Impossible gen_Specific_case --ruleCard 3 --cardsAvailable 5 10 15 20
 tc ThreeRulecard gen_Specific_rulecard --loCards 1 --hiCards 21 --ruleCard 3
 
 
 group five 20
+tc 5
 tc FiveRulecard gen_Specific_rulecard --loCards 1 --hiCards 21 --ruleCard 5
 tc FiveRulecardImpossibleToHit gen_Specific_rulecard --loCards 1 --hiCards 3 --ruleCard 5
 tc ruleCard5Impossible gen_Specific_case --ruleCard 5 --cardsAvailable 1 2 3 4

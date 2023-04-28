@@ -3,9 +3,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import static java.lang.Math.abs;
-import static java.lang.Math.min;
-
 public class GreedyCheatyPetey {
     private static class MultiSet<T> implements Iterable<T>, Cloneable {
 
@@ -73,10 +70,12 @@ public class GreedyCheatyPetey {
         } else if (ruleCard == 5)
         // Only 5 of each card
         {
-            MultiSet<Integer> valuesAvailable = new MultiSet<>();
+            ArrayList<Integer> valuesAvailable = new ArrayList<>();
             for (int i = 0; i < numberOfDifferentCardValues; i++) {
-                valuesAvailable.add(scanner.nextInt(), 1);
+                valuesAvailable.add(scanner.nextInt());
             }
+            // Sorted by highest value first
+            valuesAvailable.sort((a, b) -> b - a);
 
             @SuppressWarnings("unchecked") // java doesn't like arrays of generics
             MultiSet<Integer>[] valuesAvailableFrom = new MultiSet[target + 1];
@@ -88,18 +87,40 @@ public class GreedyCheatyPetey {
                 valuesAvailableFrom[i] = aux; // for target i you have x cards to pick from
             }
 
-            if (true) {
+            int currentTarget = target;
+            int cardsUsedCounter = 0;
+
+            for (int value : valuesAvailable) {
+                while (currentTarget - value >= 0 && valuesAvailableFrom[value].numberOf(value) > 0) {
+                    valuesAvailableFrom[value].remove(value);
+                    currentTarget -= value;
+                    cardsUsedCounter++;
+                    if (currentTarget == 0) {
+                        break;
+                    }
+                }
+            }
+
+            // Print all the cards used
+            // for (int i = 1; i <= 7; i++) {
+            // System.out.println("Target " + i + ": " +
+            // valuesAvailableFrom[i].numberOf(i));
+            // }
+
+            if (currentTarget != 0) {
                 System.out.println("Impossible");
             } else {
-                System.out.println("coins used:");
+                System.out.println(cardsUsedCounter);
             }
         } else if (ruleCard == 3)
         // Only 1 of each card
         {
-            MultiSet<Integer> valuesAvailable = new MultiSet<>();
+            ArrayList<Integer> valuesAvailable = new ArrayList<>();
             for (int i = 0; i < numberOfDifferentCardValues; i++) {
-                valuesAvailable.add(scanner.nextInt(), 1);
+                valuesAvailable.add(scanner.nextInt());
             }
+            // Sorted by highest value first
+            valuesAvailable.sort((a, b) -> b - a);
 
             @SuppressWarnings("unchecked") // java doesn't like arrays of generics
             MultiSet<Integer>[] valuesAvailableFrom = new MultiSet[target + 1];
@@ -109,6 +130,32 @@ public class GreedyCheatyPetey {
                     aux.add(val, 1);
                 }
                 valuesAvailableFrom[i] = aux; // for target i you have x cards to pick from
+            }
+
+            int currentTarget = target;
+            int cardsUsedCounter = 0;
+
+            for (int value : valuesAvailable) {
+                while (currentTarget - value >= 0 && valuesAvailableFrom[value].numberOf(value) > 0) {
+                    valuesAvailableFrom[value].remove(value);
+                    currentTarget -= value;
+                    cardsUsedCounter++;
+                    if (currentTarget == 0) {
+                        break;
+                    }
+                }
+            }
+
+            // Print all the cards used
+            // for (int i = 1; i <= 7; i++) {
+            // System.out.println("Target " + i + ": " +
+            // valuesAvailableFrom[i].numberOf(i));
+            // }
+
+            if (currentTarget != 0) {
+                System.out.println("Impossible");
+            } else {
+                System.out.println(cardsUsedCounter);
             }
         }
 
