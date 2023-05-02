@@ -83,3 +83,4 @@ tc HighestLimitLowCards gen_random --loRuleCard 1000000 --hiRuleCard 1000000 --l
 tc HighestLimitHighCards gen_random --loRuleCard 1000000 --hiRuleCard 1000000 --loCards 10 --hiCards 21
 tc HighestLimitAllCards gen_random --loRuleCard 1000000 --hiRuleCard 1000000 --loCards 1 --hiCards 21
 tc CanBeAnything gen_random --loRuleCard 1 --hiRuleCard 1000000 --loCards 1 --hiCards 21
+tc DPandGreedyGetsDifferentResult gen_Specific_case --ruleCard 1 --cardsAvailable 1 5 8 17
