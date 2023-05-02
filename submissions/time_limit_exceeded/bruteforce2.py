@@ -13,17 +13,6 @@ for _ in range(N):
     cards.append(card_value)
 cards.sort()
 
-# def min_used(target, cards, used, i, max_allowed=float("inf")):
-#     for p in filter_combinations(cards, i, max_allowed):
-#         print(p)
-#         current = 0
-#         for card in p:
-#             if current + card <= target:
-#                 current += card
-#                 used += 1
-#             if current == target:
-# print(len(i))
-
 
 def filter_combinations(lst: tuple, n, max_count: int):
     for p in combinations_with_replacement(lst, n):
@@ -31,7 +20,7 @@ def filter_combinations(lst: tuple, n, max_count: int):
             yield p
 
 
-def min_used2(target, cards, i, max_allowed=float("inf")):
+def min_used(target, cards, i, max_allowed=float("inf")):
     for p in filter_combinations(cards, i, max_allowed):
         if (min_card * len(p) > target):
             print("Impossible")
@@ -41,32 +30,28 @@ def min_used2(target, cards, i, max_allowed=float("inf")):
             print(p, len(p))
             exit()
 
+
 if rule_card == 3:
     # lowest amount used, one of each at most
-    used = float("inf")
     for i in range(1, len(cards)+1):
-        # min_used(target, cards, used, i, 3)
-        min_used2(target, cards, i, 1)
-        print(i, used)
-    if used == float("inf"):
-        print("Impossible")
-    # else:
-    #     print(used)
+        min_used(target, cards, i, 1)
+    print("Impossible")
 elif rule_card == 5:
     # lowest amount used, at most 5 of each
     for i in range(len(cards)*5):
-        # min_used(target, cards, used, i, 5)
-        min_used2(target, cards, i, 5)  # if a number is found, it will exit
+        min_used(target, cards, i, 5)
     print("Impossible")
-# elif rule_card % 2 == 1:
-#     for i in range(10000):
-#         min_used2(target, cards, i)
-#     print("Impossible")
 elif rule_card % 2 == 1:
-    used = float("inf")
     for i in range(10000):
-        # min_used(target, cards, used, i, 5)
-        min_used2(target, cards, i)
-        print(i, used)
-    if used == float("inf"):
-        print("Impossible")
+        min_used(target, cards, i)
+    print("Impossible")
+elif rule_card == 6:
+    for use in range(target//min_card+1, 0, -1):
+        print(use)
+        min_used(target, cards, use,6)
+    print("Impossible")
+elif rule_card % 2 == 0:
+    for use in range(target//min_card, 0, -1):
+        print(use)
+        min_used(target, cards, use)
+    print("Impossible")
