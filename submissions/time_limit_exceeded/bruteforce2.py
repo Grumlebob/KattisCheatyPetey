@@ -1,4 +1,4 @@
-from itertools import permutations, combinations_with_replacement
+from itertools import combinations_with_replacement
 
 
 rule_card = int(input())
@@ -11,14 +11,14 @@ for _ in range(N):
     cards.append(card_value)
 
 
-def filter_permutations(lst: tuple, n, max_count: int):
+def filter_combinations(lst: tuple, n, max_count: int):
     for p in combinations_with_replacement(lst, n):
         if all(p.count(x) <= max_count for x in set(p)):
             yield p
 
 
 def min_used(target, cards, used, i, max_allowed=float("inf")):
-    for p in filter_permutations(cards, i, max_allowed):
+    for p in filter_combinations(cards, i, max_allowed):
         print(p)
         current = 0
         for card in p:
@@ -28,13 +28,15 @@ def min_used(target, cards, used, i, max_allowed=float("inf")):
             if current == target:
                 print(len(i))
 
-def filter_permutations(lst: tuple, n, max_count: int):
+
+def filter_combinations(lst: tuple, n, max_count: int):
     for p in combinations_with_replacement(lst, n):
         if all(p.count(x) <= max_count for x in set(p)):
             yield p
 
+
 def min_used2(target, cards, i, max_allowed=float("inf")):
-    for p in filter_permutations(cards, i, max_allowed):
+    for p in filter_combinations(cards, i, max_allowed):
         print(p, sum(p))
         if sum(p) == target:
             print(p, len(p))
@@ -46,7 +48,7 @@ if rule_card == 3:
     used = float("inf")
     for i in range(len(cards)*3):
         # min_used(target, cards, used, i, 3)
-        min_used2(target, cards, i, 3)
+        min_used2(target, cards, i, 1)
         print(i, used)
     if used == float("inf"):
         print("Impossible")
