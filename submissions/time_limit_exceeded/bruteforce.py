@@ -1,3 +1,7 @@
+
+from itertools import permutations
+
+
 rule_card = int(input())
 target = rule_card * 21
 N = int(input())
@@ -8,10 +12,10 @@ for _ in range(N):
 
 current = 0
 
-if rule_card == 3:  # lowest amount used
+if rule_card == 3:  # lowest amount used, one of each at most
     used = float("inf")
     usedAccepted = float("inf")
-
+    
     for card1 in cards:
         current = 0
         for card2 in cards:
