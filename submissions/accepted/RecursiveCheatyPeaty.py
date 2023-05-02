@@ -80,21 +80,30 @@ def bottumUp(availableValues: Multiset, target, worst=False):  # limited cards o
                 valuesAvailableAt[tempTarget].remove(v, 1)
     return result[target]
 
+# One of each card
+if ruleCard == 3:
+    result = bottumUp(valuesAvailable, target)
+    print("Impossible" if result == MAX else result)
 
-# EVEN: highest amount of cards
-if ruleCard % 2 == 0:
-    result = bestToTarget(valuesAvailable, target, True)
-    print("Impossible" if result == MIN else result)
-# Only 5 of each card
+# Max 5 of each card
 elif ruleCard == 5:
     for item, _ in valuesAvailable.items.items():
         valuesAvailable.add(item, 4)
     result = bottumUp(valuesAvailable, target)
     print("Impossible" if result == MAX else result)
-# One of each card
-elif ruleCard == 3:
-    result = bottumUp(valuesAvailable, target)
-    print("Impossible" if result == MAX else result)
+
+# Max 6 of each card but worst possible
+elif ruleCard == 6:
+    for item, _ in valuesAvailable.items.items():
+        valuesAvailable.add(item, 5)
+    result = bottumUp(valuesAvailable, target, True)
+    print("Impossible" if result == MIN else result)
+
+# EVEN: highest amount of cards
+elif ruleCard % 2 == 0:
+    result = bestToTarget(valuesAvailable, target, True)
+    print("Impossible" if result == MIN else result)
+
 # ODD: lowest amount of cards
 elif ruleCard % 2 == 1:
     result = bestToTarget(valuesAvailable, target)
