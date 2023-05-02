@@ -1,7 +1,6 @@
 #! /usr/bin/env python3
 import sys
 import copy
-from functools import lru_cache
 from collections import defaultdict
 
 
@@ -38,6 +37,8 @@ sys.setrecursionlimit(10**9)
 MAX = float("inf")
 MIN = -float("inf")
 
+cachedAnswers = {}
+
 ruleCard = int(input())
 target = ruleCard * 21
 numberOfDifferentCardValues = int(input())
@@ -47,8 +48,9 @@ for _ in range(numberOfDifferentCardValues):
     valuesAvailable.add(int(input()), 1)
 
 
-@lru_cache(maxsize=None)
 def bestToTarget(availableValues: Multiset, target, worst=False):  # unlimited cards only
+    if (availableValues, target) in cachedAnswers:
+        return cachedAnswers[(availableValues, target)]
     if target == 0:
         return 0
     elif target < 0:
@@ -59,6 +61,7 @@ def bestToTarget(availableValues: Multiset, target, worst=False):  # unlimited c
         newValues = availableValues
         pre = bestToTarget(newValues, target - v, worst)
         res = best(res, pre + 1)
+    cachedAnswers[(availableValues, target)] = res
     return res
 
 
