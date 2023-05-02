@@ -1,10 +1,9 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Scanner;
-
-import static java.lang.Math.abs;
-import static java.lang.Math.min;
 
 public class GreedyCheatyPetey {
     private static class MultiSet<T> implements Iterable<T>, Cloneable {
@@ -33,10 +32,6 @@ public class GreedyCheatyPetey {
             }
         }
 
-        public void remove(T obj) {
-            remove(obj, 1);
-        }
-
         public int numberOf(T obj) {
             var count = ms.get(obj);
             return count == null ? 0 : count;
@@ -60,85 +55,75 @@ public class GreedyCheatyPetey {
         }
     }
 
+    private static int greed(MultiSet<Integer> valuesAvailable, int target, boolean worst, boolean oneOfEach) {
+        LinkedList<Integer> orderedValues = new LinkedList<>();
+        for (var value : valuesAvailable) {
+            for (var i = 0; i < valuesAvailable.numberOf(value); i++) {
+                orderedValues.add(value);
+            }
+        }
+        Collections.sort(orderedValues);
+        if (!worst) {
+            Collections.reverse(orderedValues); //take biggest first
+        }
+        var count = 0;
+        while (target > 0 && orderedValues.size() > 0) {
+            var head = orderedValues.getFirst();
+            if (head <= target) {
+                target -= head;
+                count++;
+                if (oneOfEach) orderedValues.removeFirst();
+            } 
+            else if (worst) return -1; //we dont have any smaller values to use
+            else orderedValues.removeFirst(); //value too big, go to next
+        }
+        return target == 0 ? count : -1;
+    }
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         int ruleCard = scanner.nextInt();
         int target = ruleCard * 21;
         int numberOfDifferentCardValues = scanner.nextInt();
+        var valuesAvailable = new MultiSet<Integer>();
+        for (int i = 0; i < numberOfDifferentCardValues; i++) {
+            valuesAvailable.add(scanner.nextInt(), 1);
+        }
 
-        if (ruleCard % 2 == 0) {
-            // EVEN: highest amount of cards
-
-        } else if (ruleCard == 5)
-        // Only 5 of each card
-        {
-            MultiSet<Integer> valuesAvailable = new MultiSet<>();
-            for (int i = 0; i < numberOfDifferentCardValues; i++) {
-                valuesAvailable.add(scanner.nextInt(), 1);
-            }
-
-            @SuppressWarnings("unchecked") // java doesn't like arrays of generics
-            MultiSet<Integer>[] valuesAvailableFrom = new MultiSet[target + 1];
-            for (int i = 0; i < valuesAvailableFrom.length; i++) {
-                var aux = new MultiSet<Integer>();
-                for (var val : valuesAvailable) {
-                    aux.add(val, 5);
-                }
-                valuesAvailableFrom[i] = aux; // for target i you have x cards to pick from
-            }
-
-            if (true) {
-                System.out.println("Impossible");
-            } else {
-                System.out.println("coins used:");
-            }
-        } else if (ruleCard == 3)
         // Only 1 of each card
+        if (ruleCard == 3)
         {
-            MultiSet<Integer> valuesAvailable = new MultiSet<>();
-            for (int i = 0; i < numberOfDifferentCardValues; i++) {
-                valuesAvailable.add(scanner.nextInt(), 1);
-            }
-
-            @SuppressWarnings("unchecked") // java doesn't like arrays of generics
-            MultiSet<Integer>[] valuesAvailableFrom = new MultiSet[target + 1];
-            for (int i = 0; i < valuesAvailableFrom.length; i++) {
-                var aux = new MultiSet<Integer>();
-                for (var val : valuesAvailable) {
-                    aux.add(val, 1);
-                }
-                valuesAvailableFrom[i] = aux; // for target i you have x cards to pick from
-            }
+            var result = greed(valuesAvailable, target, false, true);
+            System.out.println(result == -1 ? "Impossible" : result);
         }
+        // Only 5 of each card
+        else if (ruleCard == 5) {
+            for (var value : valuesAvailable) {
+                valuesAvailable.add(value, 4);
+            }
+            var result = greed(valuesAvailable, target, false, true);
+            System.out.println(result == -1 ? "Impossible" : result);
 
+        }
+        //max 6 of each and worst
+        else if (ruleCard == 6) {
+            for (var value : valuesAvailable) {
+                valuesAvailable.add(value, 5);
+            }
+            var result = greed(valuesAvailable, target, true, true);
+            System.out.println(result == -1 ? "Impossible" : result);
+        }
+        // ODD: lowest amount of cards
         else if (ruleCard % 2 == 1) {
-            // ODD: lowest amount of cards
-            ArrayList<Integer> valuesAvailable = new ArrayList<>();
-            for (int i = 0; i < numberOfDifferentCardValues; i++) {
-                valuesAvailable.add(scanner.nextInt());
-            }
-            // Sorted by highest value first
-            valuesAvailable.sort((a, b) -> b - a);
-
-            int currentTarget = target;
-            int cardsUsedCounter = 0;
-            for (int value : valuesAvailable) {
-                while (currentTarget - value >= 0) {
-                    currentTarget -= value;
-                    cardsUsedCounter++;
-                    if (currentTarget == 0) {
-                        break;
-                    }
-                }
-            }
-
-            if (currentTarget != 0) {
-                System.out.println("Impossible");
-            } else {
-                System.out.println(cardsUsedCounter);
-            }
-
+            var result = greed(valuesAvailable, target, false, false);
+            System.out.println(result == -1 ? "Impossible" : result);
         }
+        //Take as many as possible
+        else if (ruleCard % 2 == 0) {
+            var result = greed(valuesAvailable, target, true, false);
+            System.out.println(result == -1 ? "Impossible" : result);
+
+        } 
     }
 }
