@@ -55,47 +55,39 @@ public class MainCheatyPetey {
         int[] dp = new int[target + 1];
         @SuppressWarnings("unchecked")
         MultiSet<Integer>[] cardsAvailable = new MultiSet[target + 1];
-        ; // only used if isAmountOfCardsLimited == true
+        // only used if isAmountOfCardsLimited == true
         for (var i = 0; i < cardsAvailable.length && isPlaysLimited; i++) {
             cardsAvailable[i] = cardSet.clone();
         }
+        // It takes us 0 cards to get to 0
         dp[0] = 0;
         for (int currentTarget = 1; currentTarget <= target; currentTarget++) {
-            // Initialize every current best solution to Max value, as that is worse than
-            // any other solution.
-            // When finding minimum we set this number high, if we are finding max we set it
-            // low.
-            // Because we want to find something where they draw the most cards, and drawing
-            // 1 card is more than 0.
+            // Initialize every current best solution to the Max/Min int,
+            // which is the worst possible solution
             dp[currentTarget] = isMostPlays ? Integer.MIN_VALUE : Integer.MAX_VALUE;
             for (int cardValue : cardSet) {
-                // If we don't overdraw.
+                // So we don't overdraw
                 if (currentTarget - cardValue < 0 || dp[currentTarget - cardValue] == Integer.MAX_VALUE
                         || dp[currentTarget - cardValue] == Integer.MIN_VALUE) {
                     continue;
                 }
-                // System.out.println("Current target:" + currentTarget + " Current card value:"
-                // + currentCardValue
-                // + " Current best solution:" + dp[currentTarget] + " New solution:"
-                // + dp[currentTarget - currentCardValue] + 1);
+                // If we can beat current best solution, update it.
                 if (isMostPlays && dp[currentTarget] < dp[currentTarget - cardValue] + 1
                         || !isMostPlays && dp[currentTarget] > dp[currentTarget - cardValue] + 1) {
                     dp[currentTarget] = dp[currentTarget - cardValue] + 1;
+                    // If we are limited in amount of cards, remove the card we just used.
                     if (isPlaysLimited) {
                         cardsAvailable[currentTarget] = cardsAvailable[currentTarget - cardValue]
                                 .clone();
                         cardsAvailable[currentTarget].remove(cardValue);
                     }
                 }
-                // System.out.println(dp[currentTarget]);
             }
         }
-
         return dp[target];
     }
 
     public static void main(String[] args) {
-
         // Get runtime
         // long startTime = System.nanoTime();
 
