@@ -1,10 +1,10 @@
 import java.util.*;
 
-public class Barshelf2 {
+public class Barshelf {
     static int n;
     static int[] segmentTree;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         n = scanner.nextInt();
         int[] bottles = new int[n];
@@ -27,31 +27,44 @@ public class Barshelf2 {
 
         segmentTree = new int[2 * sortedBottlesWithNeighbours.size()];
         long[] messyTrios = new long[n];
-        for (int i = 0; i < n; i++) { //left to right
+        for (int i = 0; i < n; i++) { // left to right
             var bottle = bottles[i];
             add(heightToIndex.get(bottle), 1);
-            messyTrios[i] = sum(heightToIndex.get(bottle * 2), heightToIndex.get(sortedBottlesWithNeighbours.get(sortedBottlesWithNeighbours.size() - 1))); // how many bottles of height >= 2*b have we passed
+            messyTrios[i] = sum(heightToIndex.get(bottle * 2),
+                    heightToIndex.get(sortedBottlesWithNeighbours.get(sortedBottlesWithNeighbours.size() - 1))); // how
+                                                                                                                 // many
+                                                                                                                 // bottles
+                                                                                                                 // of
+                                                                                                                 // height
+                                                                                                                 // >=
+                                                                                                                 // 2*b
+                                                                                                                 // have
+                                                                                                                 // we
+                                                                                                                 // passed
         }
         // now all bottles knows how many previous bottles were at least double height
 
         segmentTree = new int[2 * sortedBottlesWithNeighbours.size()];
 
-        for (int i = bottles.length - 1; i >= 0; i--) { //right to left
+        for (int i = bottles.length - 1; i >= 0; i--) { // right to left
             var bottle = bottles[i];
             add(heightToIndex.get(bottle), 1);
-            messyTrios[i] *= sum(1, heightToIndex.get(bottle / 2)); // how many bottles of height <= bottle/2 have we passed
+            messyTrios[i] *= sum(1, heightToIndex.get(bottle / 2)); // how many bottles of height <= bottle/2 have we
+                                                                    // passed
         }
 
         System.out.println(Arrays.stream(messyTrios).sum());
     }
 
-    private static int sum(int from, int to) { //inclusive
+    private static int sum(int from, int to) { // inclusive
         from += segmentTree.length / 2;
         to += segmentTree.length / 2;
         int s = 0;
         while (from <= to) {
-            if (from % 2 == 1) s += segmentTree[from++];
-            if (to % 2 == 0) s += segmentTree[to--];
+            if (from % 2 == 1)
+                s += segmentTree[from++];
+            if (to % 2 == 0)
+                s += segmentTree[to--];
             from /= 2;
             to /= 2;
         }
