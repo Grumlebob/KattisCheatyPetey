@@ -57,8 +57,9 @@ public class MainCheatyPetey {
         MultiSet<Integer>[] cardsAvailable = new MultiSet[target + 1];
         // only used if isAmountOfCardsLimited == true
         for (var i = 0; i < cardsAvailable.length && isPlaysLimited; i++) {
-            cardsAvailable[i] = cardSet.clone();
+            cardsAvailable[i] = new MultiSet<>();
         }
+        cardsAvailable[0] = cardSet.clone();
         // It takes us 0 cards to get to 0
         dp[0] = 0;
         for (int currentTarget = 1; currentTarget <= target; currentTarget++) {
@@ -68,7 +69,8 @@ public class MainCheatyPetey {
             for (int cardValue : cardSet) {
                 // So we don't overdraw
                 if (currentTarget - cardValue < 0 || dp[currentTarget - cardValue] == Integer.MAX_VALUE
-                        || dp[currentTarget - cardValue] == Integer.MIN_VALUE) {
+                        || dp[currentTarget - cardValue] == Integer.MIN_VALUE
+                        || isPlaysLimited && cardsAvailable[currentTarget - cardValue].numberOf(cardValue) == 0) {
                     continue;
                 }
                 // If we can beat current best solution, update it.
