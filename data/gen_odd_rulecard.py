@@ -19,8 +19,8 @@ from argparse import ArgumentParser
 
 parser = ArgumentParser("Random input to skelet")
 parser.add_argument("seed", type=int, help="seed")
-parser.add_argument("--loRandom", type=int, default=1, help="smallest integer")
-parser.add_argument("--hiRandom", type=int, default=1000000, help="largest integer")
+parser.add_argument("--loRuleCard", type=int, default=1, help="smallest integer")
+parser.add_argument("--hiRuleCard", type=int, default=1000000, help="largest integer")
 parser.add_argument("--loCards", type=int, default=1, help="smallest integer")
 parser.add_argument("--hiCards", type=int, default=21, help="largest integer")
 args = parser.parse_args()

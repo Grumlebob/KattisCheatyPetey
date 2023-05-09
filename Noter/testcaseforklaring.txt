@@ -4,13 +4,6 @@
 3
 7
 
-- tc specificCaseCatchesGreedyAlgorithm gen_Specific_case --ruleCard 1 --cardsAvailable 1 5 8 17 - Tester rulecard odd, muligt - 3 - frasorterer greedy. - 
-1
-4
-1
-5
-8
-17
 
 - 2.in Tester rulecard odd, impossible 
 1
@@ -26,10 +19,6 @@
 11
 21
 
-- tc EvenRulecardImpossible gen_Specific_case --ruleCard 2 --cardsAvailable 5 - Tester rulecard even, impossible 
-2
-1
-5
 
 - 4.in - Tester rulecard 3, muligt
 3
@@ -39,22 +28,6 @@
 19
 21
 
-- tc ruleCard3Impossible gen_Specific_case --ruleCard 3 --cardsAvailable 5 10 15 20 - Tester rulecard 3, impossible - Target 63, and if all cards are used 50 will be reachable
-3
-4
-5
-10
-15
-20
-
-Tester rulecard 5, muligt:
-- tc ruleCard5Impossible gen_Specific_case --ruleCard 5 --cardsAvailable 1 2 3 4 - Tester rulecard 5, impossible - Target to hit is 105, and if all cards are used 75 will be reachable.
-5
-4
-1
-2
-3
-4
 
 - 5.in - Tester rulecard 5 er muligt
 Result when running greedy and DP:
@@ -70,21 +43,4 @@ Input	Target	Result	Cards   used:	Sum
 6		30		Used  6: 0	    5	    30
 7		35		Used  7: 0	    5	    35
 					            19	    105
-
-
-6.in Tester rulecard 3 er muligt, og DP vælger bedre end greedy
-3 Rule example				
-Input		Target		Greedy will choose 6 cards
-3		    63		    21
-8				        20
-1				        15
-2				        1
-4				        2
-8				        4
-14				
-15				        DP wil choose 4 cards
-20				        21
-21				        20
-				        14
-				        8
 
