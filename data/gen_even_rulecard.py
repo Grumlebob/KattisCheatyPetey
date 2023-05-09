@@ -28,8 +28,8 @@ args = parser.parse_args()
 random.seed(args.seed)
 
 
-lowestRandom = args.loRandom
-highestRandom = args.hiRandom
+lowestRandom = args.loRuleCard
+highestRandom = args.hiRuleCard
 
 lowestCards = args.loCards
 highestCards = args.hiCards
@@ -44,7 +44,7 @@ print(amountOfCards)
 uniqueNumbers = {}
 
 while len(uniqueNumbers) < amountOfCards:
-    uniqueNumbers[random.randrange(lowestCards, highestCards + 1)] = 1
+    uniqueNumbers[random.randrange(1, highestCards + 1)] = 1
 
 for key in uniqueNumbers:
     print(key)
