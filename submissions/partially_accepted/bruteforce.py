@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 from itertools import combinations_with_replacement
 
 
@@ -14,7 +16,7 @@ for _ in range(N):
 cards.sort()
 
 
-def filter_combinations(lst: tuple, n, max_count: int):
+def filter_combinations(lst, n, max_count):
     for p in combinations_with_replacement(lst, n):
         if all(p.count(x) <= max_count for x in set(p)):
             yield p
