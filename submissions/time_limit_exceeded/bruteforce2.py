@@ -25,7 +25,19 @@ def min_used(target, cards, i, max_allowed=float("inf")):
         if (min_card * len(p) > target):
             print("Impossible")
             exit()
-        # print(p, sum(p))
+        print(p, sum(p))
+        if sum(p) == target:
+            print(p, len(p))
+            exit()
+
+
+def max_used(target, cards, i, max_allowed=float("inf")):
+    for p in filter_combinations(cards, i, max_allowed):
+        print(p)
+        if (min_card * len(p) < target):
+            print("Impossible")
+            exit()
+        print(p, sum(p))
         if sum(p) == target:
             print(p, len(p))
             exit()
@@ -42,16 +54,20 @@ elif rule_card == 5:
         min_used(target, cards, i, 5)
     print("Impossible")
 elif rule_card % 2 == 1:
-    for i in range(10000):
+    # for i in range(target//min_card):
+    i = 0
+    while i < target//min_card:
+        print(i)
         min_used(target, cards, i)
+        i += 1
     print("Impossible")
 elif rule_card == 6:
     for use in range(target//min_card+1, 0, -1):
         print(use)
-        min_used(target, cards, use,6)
+        max_used(target, cards, use, 6)
     print("Impossible")
 elif rule_card % 2 == 0:
     for use in range(target//min_card, 0, -1):
         print(use)
-        min_used(target, cards, use)
+        max_used(target, cards, use)
     print("Impossible")
