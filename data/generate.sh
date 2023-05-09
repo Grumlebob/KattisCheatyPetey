@@ -30,6 +30,8 @@ tc ImpossibleSolutionForOne gen_Specific_case --ruleCard 1 --cardsAvailable 6 8
 tc RandomLowCardsForOne gen_random --loRuleCard 1 --hiRuleCard 1 --loCards 1 --hiCards 10
 tc RandomHighCardsForOne gen_random --loRuleCard 1 --hiRuleCard 1 --loCards 10 --hiCards 21
 tc RandomAllCardsForOne gen_random --loRuleCard 1 --hiRuleCard 1 --loCards 1 --hiCards 21
+tc 1
+tc 2
 
 group RuleCardOdd 14
 
@@ -48,6 +50,7 @@ tc ImpossibleSolutionForEven gen_Specific_case --ruleCard 2 --cardsAvailable 9 2
 tc RandomLowInputForEven gen_even_rulecard --loRuleCard 7 --hiRuleCard 20 --loCards 1 --hiCards 21
 tc RandomMiddleInputForEven gen_even_rulecard --loRuleCard 7 --hiRuleCard 10000 --loCards 1 --hiCards 21
 tc RandomHighInputForEven gen_even_rulecard --loRuleCard 7 --hiRuleCard 1000000 --loCards 1 --hiCards 21
+tc 3
 
 group RuleCardThree 14
 
@@ -57,6 +60,7 @@ tc ImpossibleSolutionForThree gen_Specific_case --ruleCard 3 --cardsAvailable 1 
 tc RandomLowCardsForThree gen_random --loRuleCard 3 --hiRuleCard 3 --loCards 1 --hiCards 10
 tc RandomHighCardsForThree gen_random --loRuleCard 3 --hiRuleCard 3 --loCards 10 --hiCards 21
 tc RandomAllCardsForThree gen_random --loRuleCard 3 --hiRuleCard 3 --loCards 1 --hiCards 21
+tc 4
 
 group RuleCardFive 14
 
@@ -66,6 +70,7 @@ tc ImpossibleSolutionForFive gen_Specific_case --ruleCard 5 --cardsAvailable 1 2
 tc RandomLowCardsForFive gen_random --loRuleCard 5 --hiRuleCard 5 --loCards 1 --hiCards 10
 tc RandomHighCardsForFive gen_random --loRuleCard 5 --hiRuleCard 5 --loCards 10 --hiCards 21
 tc RandomAllCardsForFive gen_random --loRuleCard 5 --hiRuleCard 5 --loCards 1 --hiCards 21
+tc 5
 
 group RuleCardSix 14
 
