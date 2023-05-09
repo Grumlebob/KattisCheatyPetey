@@ -55,12 +55,16 @@ public class WithoutMemorization {
         if (target == 0) {
             return 0;
         }
+        if (target == 3) {
+            System.out.println();
+            System.out.println();
+        }
 
         int best = isMostPlays ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         for (int cardValue : cardSet) {
             if (target - cardValue >= 0) {
                 MultiSet<Integer> newCardSet = cardSet.clone();
-                newCardSet.remove(cardValue);
+                if (isPlaysLimited) newCardSet.remove(cardValue);
                 int subResult = recursive(newCardSet, target - cardValue, isMostPlays, isPlaysLimited);
                 if (subResult != Integer.MAX_VALUE && subResult != Integer.MIN_VALUE) {
                     if (isMostPlays) {
@@ -87,7 +91,7 @@ public class WithoutMemorization {
     private static int calculate(MultiSet<Integer> cardSet, int target, boolean isMostPlays,
             boolean isPlaysLimited) {
         int result = recursive(cardSet, target, isMostPlays, isPlaysLimited);
-        return result == Integer.MAX_VALUE || result == Integer.MIN_VALUE ? result : result;
+        return result;
     }
 
     public static void main(String[] args) {
