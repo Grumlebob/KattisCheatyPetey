@@ -15,14 +15,16 @@ public class Main {
         sa = suffixArrayConstruction(inputString);
         lcp = constructLCPArray(inputString, sa);
         System.out.println(maxLCP);
+        scanner.close();
     }
 
-    //100 % his solution
-    //https://github.com/stevenhalim/cpbook-code/blob/master/ch6/sa_lcp.py
-    //Sorting with cyclic shifts
+    // 100 % his solution
+    // https://github.com/stevenhalim/cpbook-code/blob/master/ch6/sa_lcp.py
+    // Sorting with cyclic shifts
     public static int[] suffixArrayConstruction(String s) {
         return Arrays.copyOfRange(sortCyclicShifts(s + '\0'), 1, s.length() + 1);
     }
+
     public static int[] sortCyclicShifts(String s) {
         int n = s.length();
         int alphabet = 256;
@@ -36,10 +38,10 @@ public class Main {
         }
         // Calculate the starting index for each character in the sorted suffix array
         for (int i = 1; i < alphabet; i++) {
-            charCount[i] += charCount[i-1];
+            charCount[i] += charCount[i - 1];
         }
         // Construct the sorted suffix array
-        for (int i = n-1; i >= 0; i--) {
+        for (int i = n - 1; i >= 0; i--) {
             charCount[s.charAt(i)]--;
             suffixArray[charCount[s.charAt(i)]] = i;
         }
@@ -48,7 +50,7 @@ public class Main {
         equivalenceClasses[suffixArray[0]] = 0;
         int classes = 1;
         for (int i = 1; i < n; i++) {
-            if (s.charAt(suffixArray[i]) != s.charAt(suffixArray[i-1])) {
+            if (s.charAt(suffixArray[i]) != s.charAt(suffixArray[i - 1])) {
                 classes++;
             }
             equivalenceClasses[suffixArray[i]] = classes - 1;
@@ -70,11 +72,11 @@ public class Main {
                 charCount[equivalenceClasses[tempSufixArray[i]]]++;
             }
             for (int i = 1; i < classes; i++) {
-                charCount[i] += charCount[i-1];
+                charCount[i] += charCount[i - 1];
             }
 
             // Construct the sorted suffix array based on the current equivalence classes
-            for (int i = n-1; i >= 0; i--) {
+            for (int i = n - 1; i >= 0; i--) {
                 charCount[equivalenceClasses[tempSufixArray[i]]]--;
                 suffixArray[charCount[equivalenceClasses[tempSufixArray[i]]]] = tempSufixArray[i];
             }
@@ -82,8 +84,10 @@ public class Main {
             tempEquivalanceClasses[suffixArray[0]] = 0;
             classes = 1;
             for (int i = 1; i < n; i++) {
-                int cur = equivalenceClasses[suffixArray[i]] * alphabet + equivalenceClasses[(suffixArray[i] + (1 << h)) % n];
-                int prev = equivalenceClasses[suffixArray[i-1]] * alphabet + equivalenceClasses[(suffixArray[i-1] + (1 << h)) % n];
+                int cur = equivalenceClasses[suffixArray[i]] * alphabet
+                        + equivalenceClasses[(suffixArray[i] + (1 << h)) % n];
+                int prev = equivalenceClasses[suffixArray[i - 1]] * alphabet
+                        + equivalenceClasses[(suffixArray[i - 1] + (1 << h)) % n];
                 if (cur != prev) {
                     classes++;
                 }
@@ -97,8 +101,7 @@ public class Main {
         return suffixArray;
     }
 
-
-    //Runtime: O(N) - N : Length of string
+    // Runtime: O(N) - N : Length of string
     public static int[] constructLCPArray(String s, int[] sa) {
         int n = s.length();
         int[] lcp = new int[n - 1];
@@ -133,8 +136,7 @@ public class Main {
         return lcp;
     }
 
-
-    //Finds that actual string, that is the longest repeating substring
+    // Finds that actual string, that is the longest repeating substring
     public static String findLongestRepeatingSubstring(String s) {
         int n = s.length();
         int maxLcp = 0;

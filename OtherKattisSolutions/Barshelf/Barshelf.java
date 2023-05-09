@@ -4,7 +4,7 @@ public class Barshelf {
     static int n;
     static int[] segmentTree;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         n = scanner.nextInt();
         int[] bottles = new int[n];
@@ -31,29 +31,22 @@ public class Barshelf {
             var bottle = bottles[i];
             add(heightToIndex.get(bottle), 1);
             messyTrios[i] = sum(heightToIndex.get(bottle * 2),
-                    heightToIndex.get(sortedBottlesWithNeighbours.get(sortedBottlesWithNeighbours.size() - 1))); // how
-                                                                                                                 // many
-                                                                                                                 // bottles
-                                                                                                                 // of
-                                                                                                                 // height
-                                                                                                                 // >=
-                                                                                                                 // 2*b
-                                                                                                                 // have
-                                                                                                                 // we
-                                                                                                                 // passed
+                    // How many bottles of height >= 2*b have we passed
+                    // now all bottles knows how many previous bottles were at least double height
+                    heightToIndex.get(sortedBottlesWithNeighbours.get(sortedBottlesWithNeighbours.size() - 1)));
         }
-        // now all bottles knows how many previous bottles were at least double height
 
         segmentTree = new int[2 * sortedBottlesWithNeighbours.size()];
 
         for (int i = bottles.length - 1; i >= 0; i--) { // right to left
             var bottle = bottles[i];
             add(heightToIndex.get(bottle), 1);
-            messyTrios[i] *= sum(1, heightToIndex.get(bottle / 2)); // how many bottles of height <= bottle/2 have we
-                                                                    // passed
+            // how many bottles of height <= bottle/2 have we passed
+            messyTrios[i] *= sum(1, heightToIndex.get(bottle / 2));
         }
 
         System.out.println(Arrays.stream(messyTrios).sum());
+        scanner.close();
     }
 
     private static int sum(int from, int to) { // inclusive

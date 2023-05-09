@@ -90,9 +90,6 @@ public class MainCheatyPetey {
     }
 
     public static void main(String[] args) {
-        // Get runtime
-        // long startTime = System.nanoTime();
-
         Scanner scanner = new Scanner(System.in);
         int ruleCard = scanner.nextInt();
         int target = ruleCard * 21;
