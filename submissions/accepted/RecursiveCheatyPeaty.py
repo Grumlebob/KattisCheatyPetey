@@ -74,7 +74,6 @@ def bottumUp(availableValues: Multiset, target, worst=False):  # limited cards o
     valuesAvailableAt[0] = availableValues
     for tempTarget in range(1, target + 1):
         for v, _ in availableValues.items.items():
-            assert valuesAvailableAt.count(None) == 0
             if v > tempTarget or valuesAvailableAt[tempTarget - v].numberOf(v) == 0:
                 continue
             if worst and result[tempTarget - v] + 1 > result[tempTarget] or not worst and result[tempTarget - v] + 1 < result[tempTarget]:
