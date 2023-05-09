@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class MainCheatyPetey {
+public class WithoutMemorization {
     private static class MultiSet<T> implements Iterable<T>, Cloneable {
 
         private HashMap<T, Integer> ms;
@@ -50,43 +50,44 @@ public class MainCheatyPetey {
         }
     }
 
-    private static int bottomUp(MultiSet<Integer> cardSet, int target, boolean isMostPlays,
+    private static int recursive(MultiSet<Integer> cardSet, int target, boolean isMostPlays,
             boolean isPlaysLimited) {
-        int[] dp = new int[target + 1];
-        @SuppressWarnings("unchecked")
-        MultiSet<Integer>[] cardsAvailable = new MultiSet[target + 1];
-        // only used if isAmountOfCardsLimited == true
-        for (var i = 0; i < cardsAvailable.length && isPlaysLimited; i++) {
-            cardsAvailable[i] = new MultiSet<>();
+        if (target == 0) {
+            return 0;
         }
-        cardsAvailable[0] = cardSet.clone();
-        // It takes us 0 cards to get to 0
-        dp[0] = 0;
-        for (int currentTarget = 1; currentTarget <= target; currentTarget++) {
-            // Initialize every current best solution to the Max/Min int,
-            // which is the worst possible solution
-            dp[currentTarget] = isMostPlays ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-            for (int cardValue : cardSet) {
-                // So we don't overdraw
-                if (currentTarget - cardValue < 0 || dp[currentTarget - cardValue] == Integer.MAX_VALUE
-                        || dp[currentTarget - cardValue] == Integer.MIN_VALUE
-                        || isPlaysLimited && cardsAvailable[currentTarget - cardValue].numberOf(cardValue) == 0) {
-                    continue;
-                }
-                // If we can beat current best solution, update it.
-                if (isMostPlays && dp[currentTarget] < dp[currentTarget - cardValue] + 1
-                        || !isMostPlays && dp[currentTarget] > dp[currentTarget - cardValue] + 1) {
-                    dp[currentTarget] = dp[currentTarget - cardValue] + 1;
-                    // If we are limited in amount of cards, remove the card we just used.
-                    if (isPlaysLimited) {
-                        cardsAvailable[currentTarget] = cardsAvailable[currentTarget - cardValue]
-                                .clone();
-                        cardsAvailable[currentTarget].remove(cardValue);
+
+        int best = isMostPlays ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        for (int cardValue : cardSet) {
+            if (target - cardValue >= 0) {
+                MultiSet<Integer> newCardSet = cardSet.clone();
+                newCardSet.remove(cardValue);
+                int subResult = recursive(newCardSet, target - cardValue, isMostPlays, isPlaysLimited);
+                if (subResult != Integer.MAX_VALUE && subResult != Integer.MIN_VALUE) {
+                    if (isMostPlays) {
+                        best = Math.max(best, subResult + 1);
+                    } else {
+                        best = Math.min(best, subResult + 1);
                     }
                 }
             }
         }
-        return dp[target];
+
+        if (isPlaysLimited) {
+            int remaining = cardSet.numberOf(target);
+            if (remaining > 0 && best != Integer.MAX_VALUE && best != Integer.MIN_VALUE) {
+                return best;
+            } else {
+                return Integer.MAX_VALUE;
+            }
+        } else {
+            return best;
+        }
+    }
+
+    private static int calculate(MultiSet<Integer> cardSet, int target, boolean isMostPlays,
+            boolean isPlaysLimited) {
+        int result = recursive(cardSet, target, isMostPlays, isPlaysLimited);
+        return result == Integer.MAX_VALUE || result == Integer.MIN_VALUE ? result : result;
     }
 
     public static void main(String[] args) {
@@ -102,7 +103,7 @@ public class MainCheatyPetey {
 
         // Only 1 of each card
         if (ruleCard == 3) {
-            var result = bottomUp(cardSet, target, false, true);
+            var result = calculate(cardSet, target, false, true);
             System.out.println(result == Integer.MAX_VALUE ? "Impossible" : result);
         }
 
@@ -111,7 +112,7 @@ public class MainCheatyPetey {
             for (var value : cardSet) {
                 cardSet.add(value, 4);
             }
-            var result = bottomUp(cardSet, target, false, true);
+            var result = calculate(cardSet, target, false, true);
             System.out.println(result == Integer.MAX_VALUE ? "Impossible" : result);
         }
 
@@ -120,20 +121,19 @@ public class MainCheatyPetey {
             for (var value : cardSet) {
                 cardSet.add(value, 5);
             }
-            var result = bottomUp(cardSet, target, true, true);
+            var result = calculate(cardSet, target, true, true);
             System.out.println(result == Integer.MIN_VALUE ? "Impossible" : result);
         }
 
         // ODD: lowest amount of cards
         else if (ruleCard % 2 == 1) {
-
-            var result = bottomUp(cardSet, target, false, false);
+            var result = calculate(cardSet, target, false, false);
             System.out.println(result == Integer.MAX_VALUE ? "Impossible" : result);
         }
 
         // EVEN: highest amount of cards
         else if (ruleCard % 2 == 0) {
-            var result = bottomUp(cardSet, target, true, false);
+            var result = calculate(cardSet, target, true, false);
             System.out.println(result == Integer.MIN_VALUE ? "Impossible" : result);
 
         }

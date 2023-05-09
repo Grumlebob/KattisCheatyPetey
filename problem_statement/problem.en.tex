@@ -3,9 +3,9 @@
 
 After already been kicked out of several casinos, Cheaty Petey is hungry to win some money in blackjack. Luckily a new casino just opened up, “The Rulebreaker”, that has no previous track record of Petey cheating with his card duplication sleeves.
 
-With his magnificent sleeves, Petey is able to produce as many cards, of the variant he already brought with him. Last time Petey got caught cheating, he brought a full deck with him, but this time he has learned from his mistakes. Petey will only bring a few different cards this time, and will follow certain rules, in order to minimize getting caught.
+With his magnificent sleeves, Petey is able to produce as many cards, of the variant he already brought with him. Last time Petey got caught cheating, he brought a full deck with him, but this time he has learned from his mistakes. Petey will try to only bring a few different cards this time, and will follow certain rules, in order to minimize getting caught.
 
-On the opening night of The Rulebreaker, they play a special variant of Blackjack, where all the cards are numbered 1 to 21 and where a random number is chosen before each game, which specifies what rules to follow in order to win. 
+On the opening night of The Rulebreaker, they play a special variant of Blackjack, where all the cards are numbered 1 to 21 and where a random rule card is picked before each game, which specifies what rules to follow in order to win. 
 
 Based on the number on the rule card, you will have to follow certain criteria. Notice that all criteria that the rule card meets must be followed (if r = 5 then also r is odd). 
 
@@ -17,6 +17,7 @@ If rule card is even & Then you must output the highest amount of cards to win \
 If rule card is odd   & Then you must output the lowest amount of cards to win  \\ \hline
 Rule card = 3         & You may only use one of each card                       \\ \hline
 Rule card = 5         & You may only use 5 of each cards                        \\ \hline
+Rule card = 6         & You may only use 6 of each cards                        \\ \hline
 \end{tabular}
 
 \section*{Input}
@@ -27,3 +28,18 @@ The second line consist of one integer $N$, the number of different card values 
 
 \section*{Output}
 If target is impossible to hit, print "Impossible". Otherwise, print the number of cards Petey needs to draw to hit the target.
+
+\section*{Points}
+Your solution will be tested on a number of test case groups. To get points for a group then you must pass all test cases in the group.
+
+\begin{tabular}{|l|l|l|}
+    \hline
+    Group & Points & Limits                                    \\ \hline
+    1     & 14     & Rule card is 1                            \\ \hline
+    2     & 14     & Rule card is odd (not 3 and 5)            \\ \hline
+    3     & 14     & Rule card is even (not 6)                 \\ \hline
+    4     & 14     & Rule card is 3                            \\ \hline
+    5     & 14     & Rule card is 5                            \\ \hline
+    6     & 14     & Rule card is 6                            \\ \hline
+    7     & 16     & Rule card can be anything up to the limit \\ \hline
+\end{tabular}
