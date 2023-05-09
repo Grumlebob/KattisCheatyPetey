@@ -20,7 +20,6 @@ sample 2
 sample 3
 sample 4
 sample 5
-sample 6
 
 # generate tests here
 group RuleCardOne 14
