@@ -31,7 +31,7 @@ tc RandomLowCardsForOne gen_random --loRuleCard 1 --hiRuleCard 1 --loCards 1 --h
 tc RandomHighCardsForOne gen_random --loRuleCard 1 --hiRuleCard 1 --loCards 10 --hiCards 21
 tc RandomAllCardsForOne gen_random --loRuleCard 1 --hiRuleCard 1 --loCards 1 --hiCards 21
 tc 1
-tc 2
+tc 2 #a
 
 group RuleCardOdd 14
 
