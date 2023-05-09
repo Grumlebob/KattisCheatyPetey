@@ -9,3 +9,7 @@ Rapport.
 Wrong answer, greedy.
 
 Time limit exceeded: bruteforce.
+
+
+
+HVAD skal max input være - ret alle steder
