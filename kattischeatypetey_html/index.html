@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for HTML5 for Linux version 5.6.0">
+  <meta content="text/html; charset=utf-8" http-equiv=
+  "content-type">
+  <title></title>
+  <link rel="stylesheet" href="problem.css">
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  tex2jax: { 
+    ignoreClass: ".*",
+    inlineMath: [['$','$'], ['\\(','\\)']]
+        },
+  MMLorHTML: {
+    prefer: {Firefox: "HTML"}
+    }
+  });
+  </script>
+  <script type="text/javascript" src=
+  "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+  <div class="problembody">
+    <div class="problemheader">
+      <h1>Cheaty Petey</h1>
+      <h3>Problem ID: kattischeatypetey</h3>
+    </div>
+    <div style="width:33.00%" class="illustration">
+      <img src="img-0001.jpg" alt="img-0001.jpg" class=
+      "illustration">
+      <div class="description">
+        Image: SIphotography/iStock/Getty Images Plus/Getty
+      </div>
+    </div>
+    <p>After already being kicked out of several casinos, Cheaty
+    Petey is hungry to win some money in blackjack. Luckily a new
+    casino just opened up, “The Rulebreaker”, that has no previous
+    track record of Petey cheating with his card duplication
+    sleeves.</p>
+    <p>With his magnificent sleeves, Petey is able to produce as
+    many cards as he want, of the variant he already brought with
+    him. Last time Petey got caught cheating, he brought a full
+    deck with him, but this time he has learned from his mistakes.
+    Petey will try to only bring a few different cards this time,
+    and will follow certain rules, in order to minimize getting
+    caught.</p>
+    <p>On the opening night of The Rulebreaker, they play a special
+    variant of Blackjack, where all the cards are numbered 1 to 21
+    and where a random rule card is picked before each game, which
+    specifies what rules to follow in order to win.</p>
+    <p>Based on the number on the rule card, you will have to
+    follow certain criteria. Notice that all criteria that the rule
+    card meets must be followed (if <span class=
+    "tex2jax_process">$r = 5$</span> then also <span class=
+    "tex2jax_process">$r$</span> is odd).</p>
+    <table class="tabular" cellspacing="0">
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-left:1px solid black">
+          <p><b class="bfseries">Any rule card</b></p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p><b class="bfseries">Target to hit is 21 multiplied
+          with the rule card value</b></p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-left:1px solid black">
+          <p>If rule card is even</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>Then you must output the highest amount of cards to
+          win</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-left:1px solid black">
+          <p>If rule card is odd</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>Then you must output the lowest amount of cards to
+          win</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-left:1px solid black">
+          <p>Rule card = 3</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>You may only use one of each card</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-left:1px solid black">
+          <p>Rule card = 5</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>You may only use 5 of each cards</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-left:1px solid black; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px">
+          <p>Rule card = 6</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px">
+          <p>You may only use 6 of each cards</p>
+        </td>
+      </tr>
+    </table>
+    <h2>Input</h2>
+    <p>The first line consist of one integer <span class=
+    "tex2jax_process">$R$</span>, the rule card drawn before the
+    game, where <span class="tex2jax_process">$1\leq R \leq
+    30.000$</span></p>
+    <p>The second line consist of one integer <span class=
+    "tex2jax_process">$N$</span>, the number of different card
+    values Cheaty Petey can produce, being <span class=
+    "tex2jax_process">$1\leq N \leq 21$</span>. Following are
+    <span class="tex2jax_process">$N$</span> lines, with the unique
+    different values Cheaty Petey can produce.</p>
+    <h2>Output</h2>
+    <p>If target is impossible to hit, print "Impossible".
+    Otherwise, print the number of cards Petey needs to draw to hit
+    the target.</p>
+    <h2>Points</h2>
+    <p>Your solution will be tested on a number of test case
+    groups. To get points for a group then you must pass all test
+    cases in the group.</p>
+    <table class="tabular" cellspacing="0">
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-left:1px solid black">
+          <p>Group</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>Points</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>Limits</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-left:1px solid black">
+          <p>1</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>14</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>Rule card is 1</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-left:1px solid black">
+          <p>2</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>14</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>Rule card is odd (not 3 and 5)</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-left:1px solid black">
+          <p>3</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>14</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>Rule card is even (not 6)</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-left:1px solid black">
+          <p>4</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>14</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>Rule card is 3</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-left:1px solid black">
+          <p>5</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>14</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>Rule card is 5</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-left:1px solid black">
+          <p>6</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>14</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black">
+          <p>Rule card is 6</p>
+        </td>
+      </tr>
+      <tr>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-left:1px solid black; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px">
+          <p>7</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px">
+          <p>16</p>
+        </td>
+        <td style=
+        "border-top-style:solid; border-top-color:black; border-top-width:1px; text-align:left; border-right:1px solid black; border-bottom-style:solid; border-bottom-color:black; border-bottom-width:1px">
+          <p>Rule card can be anything up to the limit</p>
+        </td>
+      </tr>
+    </table>
+    <table class="sample" summary="sample data">
+      <tr>
+        <th>Sample Input 1</th>
+        <th>Sample Output 1</th>
+      </tr>
+      <tr>
+        <td>
+          <pre>1
+2
+3
+7
+</pre>
+        </td>
+        <td>
+          <pre>3
+</pre>
+        </td>
+      </tr>
+    </table>
+    <table class="sample" summary="sample data">
+      <tr>
+        <th>Sample Input 2</th>
+        <th>Sample Output 2</th>
+      </tr>
+      <tr>
+        <td>
+          <pre>1
+1
+6
+</pre>
+        </td>
+        <td>
+          <pre>Impossible
+</pre>
+        </td>
+      </tr>
+    </table>
+    <table class="sample" summary="sample data">
+      <tr>
+        <th>Sample Input 3</th>
+        <th>Sample Output 3</th>
+      </tr>
+      <tr>
+        <td>
+          <pre>2
+5
+1
+2
+5
+11
+21
+</pre>
+        </td>
+        <td>
+          <pre>42
+</pre>
+        </td>
+      </tr>
+    </table>
+    <table class="sample" summary="sample data">
+      <tr>
+        <th>Sample Input 4</th>
+        <th>Sample Output 4</th>
+      </tr>
+      <tr>
+        <td>
+          <pre>3
+4
+18
+5
+19
+21
+</pre>
+        </td>
+        <td>
+          <pre>4
+</pre>
+        </td>
+      </tr>
+    </table>
+    <table class="sample" summary="sample data">
+      <tr>
+        <th>Sample Input 5</th>
+        <th>Sample Output 5</th>
+      </tr>
+      <tr>
+        <td>
+          <pre>5
+7
+1
+2
+3
+4
+5
+6
+7
+</pre>
+        </td>
+        <td>
+          <pre>19
+</pre>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
