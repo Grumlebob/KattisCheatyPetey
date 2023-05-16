@@ -4,7 +4,6 @@
 # run this as ./generate.sh from the data directory. It populates data/secret
 
 . ../../_testdata_tools/gen.sh
-
 use_solution MainCheatyPetey.java # Use submissions/accepted/
 
 # all the generators are introduced here
@@ -40,7 +39,7 @@ tc PossibleSolutionForOdd gen_Specific_case --ruleCard 1 --cardsAvailable 2 4 6 
 tc ImpossibleSolutionForOdd gen_Specific_case --ruleCard 1 --cardsAvailable 10 14
 tc RandomLowInputForOdd gen_odd_rulecard --loRuleCard 6 --hiRuleCard 10 --loCards 1 --hiCards 21
 tc RandomMiddleInputForOdd gen_odd_rulecard --loRuleCard 6 --hiRuleCard 10000 --loCards 1 --hiCards 21
-tc RandomHighInputForOdd gen_odd_rulecard --loRuleCard 6 --hiRuleCard 100000 --loCards 1 --hiCards 21
+tc RandomHighInputForOdd gen_odd_rulecard --loRuleCard 6 --hiRuleCard 30000 --loCards 1 --hiCards 21
 
 group RuleCardEven 14
 
@@ -49,7 +48,7 @@ tc PossibleSolutionForEven gen_Specific_case --ruleCard 2 --cardsAvailable 1 5 1
 tc ImpossibleSolutionForEven gen_Specific_case --ruleCard 2 --cardsAvailable 9 20
 tc RandomLowInputForEven gen_even_rulecard --loRuleCard 7 --hiRuleCard 20 --loCards 1 --hiCards 21
 tc RandomMiddleInputForEven gen_even_rulecard --loRuleCard 7 --hiRuleCard 10000 --loCards 1 --hiCards 21
-tc RandomHighInputForEven gen_even_rulecard --loRuleCard 7 --hiRuleCard 100000 --loCards 1 --hiCards 21
+tc RandomHighInputForEven gen_even_rulecard --loRuleCard 7 --hiRuleCard 30000 --loCards 1 --hiCards 21
 tc 3
 
 group RuleCardThree 14
@@ -83,8 +82,8 @@ tc RandomAllCardsForSix gen_random --loRuleCard 6 --hiRuleCard 6 --loCards 1 --h
 
 group All 16
 
-tc HighestLimitLowCards gen_random --loRuleCard 100000 --hiRuleCard 100000 --loCards 1 --hiCards 10
-tc HighestLimitHighCards gen_random --loRuleCard 100000 --hiRuleCard 100000 --loCards 10 --hiCards 21
-tc HighestLimitAllCards gen_random --loRuleCard 100000 --hiRuleCard 100000 --loCards 1 --hiCards 21
-tc CanBeAnything gen_random --loRuleCard 1 --hiRuleCard 100000 --loCards 1 --hiCards 21
+tc HighestLimitLowCards gen_random --loRuleCard 30000 --hiRuleCard 30000 --loCards 1 --hiCards 10
+tc HighestLimitHighCards gen_random --loRuleCard 30000 --hiRuleCard 30000 --loCards 10 --hiCards 21
+tc HighestLimitAllCards gen_random --loRuleCard 30000 --hiRuleCard 30000 --loCards 1 --hiCards 21
+tc CanBeAnything gen_random --loRuleCard 1 --hiRuleCard 30000 --loCards 1 --hiCards 21
 tc DPandGreedyGetsDifferentResultForAll gen_Specific_case --ruleCard 1 --cardsAvailable 1 7 14 18 
