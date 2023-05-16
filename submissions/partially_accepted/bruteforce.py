@@ -3,82 +3,78 @@
 from itertools import combinations_with_replacement
 
 
-rule_card = int(input())
-target = rule_card * 21
+ruleCard = int(input())
+target = ruleCard * 21
 N = int(input())
-cards = []
+cardSet = []
 # load cards into list
-min_card = float("inf")
+minCard = float("inf")
 for _ in range(N):
-    card_value = int(input())
-    min_card = min(min_card, card_value)
-    cards.append(card_value)
-cards.sort()
+    cardValue = int(input())
+    minCard = min(minCard, cardValue)
+    cardSet.append(cardValue)
+cardSet.sort()
 
 
-def filter_combinations(lst, n, max_count):
+def filterCombinations(lst, n, maxCount):
     for p in combinations_with_replacement(lst, n):
-        if all(p.count(x) <= max_count for x in set(p)):
+        if all(p.count(x) <= maxCount for x in set(p)):
             yield p
 
 
-def min_used(target, cards, i, max_allowed=float("inf")):
-    for p in filter_combinations(cards, i, max_allowed):
-        if (min_card * len(p) > target):
+def minUsed(target, cards, i, maxAllowed=float("inf")):
+    for p in filterCombinations(cards, i, maxAllowed):
+        if (minCard * len(p) > target):
             print("Impossible")
             exit()
-        # print(p, sum(p))
+
         if sum(p) == target:
             print(len(p))
             exit()
 
 
-def max_used(target, cards, i, max_allowed=float("inf")):
-    for p in filter_combinations(cards, i, max_allowed):
-        if (min_card * len(p) < target):
+def maxUsed(target, cards, i, maxAllowed=float("inf")):
+    for p in filterCombinations(cards, i, maxAllowed):
+        if (minCard * len(p) < target):
             print("Impossible")
             exit()
-        # print(p, sum(p))
+        
         if sum(p) == target:
-            # print(p, len(p))
             print(len(p))
             exit()
 
 
-def max_used(target, cards, i, max_allowed=float("inf")):
-    for p in filter_combinations(cards, i, max_allowed):
-        if (min_card * len(p) < target):
+def maxUsed(target, cards, i, maxAllowed=float("inf")):
+    for p in filterCombinations(cards, i, maxAllowed):
+        if (minCard * len(p) < target):
             print("Impossible")
             exit()
-        # print(p, sum(p))
+        
         if sum(p) == target:
-            # print(p, len(p))
             print(len(p))
             exit()
 
 
-if rule_card == 3:
+if ruleCard == 3:
     # lowest amount used, one of each at most
-    for i in range(1, len(cards)+1):
-        min_used(target, cards, i, 1)
+    for i in range(1, len(cardSet)+1):
+        minUsed(target, cardSet, i, 1)
     print("Impossible")
-elif rule_card == 5:
+elif ruleCard == 5:
     # lowest amount used, at most 5 of each
-    for i in range(len(cards)*5):
-        min_used(target, cards, i, 5)
+    for i in range(len(cardSet)*5):
+        minUsed(target, cardSet, i, 5)
     print("Impossible")
-elif rule_card % 2 == 1:
+elif ruleCard % 2 == 1:
     for i in range(10000):
-        min_used(target, cards, i)
+        minUsed(target, cardSet, i)
         i += 1
     print("Impossible")
-elif rule_card == 6:
-    for use in range(target//min_card+1, 0, -1):
-        # print(use)
-        max_used(target, cards, use, 6)
+elif ruleCard == 6:
+    for use in range(target//minCard+1, 0, -1):
+        maxUsed(target, cardSet, use, 6)
     print("Impossible")
-elif rule_card % 2 == 0:
-    for use in range(target//min_card, 0, -1):
-        # print(use)
-        max_used(target, cards, use)
+elif ruleCard % 2 == 0:
+    for use in range(target//minCard, 0, -1):
+        maxUsed(target, cardSet, use)
     print("Impossible")

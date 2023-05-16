@@ -23,15 +23,6 @@ public class GreedyCheatyPetey {
             ms.put(obj, count + amount);
         }
 
-        public void remove(T obj, int amount) {
-            var count = numberOf(obj);
-            if (count <= amount) {
-                ms.remove(obj);
-            } else {
-                ms.put(obj, count - amount);
-            }
-        }
-
         public int numberOf(T obj) {
             var count = ms.get(obj);
             return count == null ? 0 : count;
@@ -55,15 +46,15 @@ public class GreedyCheatyPetey {
         }
     }
 
-    private static int greed(MultiSet<Integer> valuesAvailable, int target, boolean worst, boolean oneOfEach) {
+    private static int greed(MultiSet<Integer> cardSet, int target, boolean isMostPlays, boolean isPlaysLimited) {
         LinkedList<Integer> orderedValues = new LinkedList<>();
-        for (var value : valuesAvailable) {
-            for (var i = 0; i < valuesAvailable.numberOf(value); i++) {
+        for (var value : cardSet) {
+            for (var i = 0; i < cardSet.numberOf(value); i++) {
                 orderedValues.add(value);
             }
         }
         Collections.sort(orderedValues);
-        if (!worst) {
+        if (!isMostPlays) {
             Collections.reverse(orderedValues); //take biggest first
         }
         var count = 0;
@@ -72,9 +63,9 @@ public class GreedyCheatyPetey {
             if (head <= target) {
                 target -= head;
                 count++;
-                if (oneOfEach) orderedValues.removeFirst();
+                if (isPlaysLimited) orderedValues.removeFirst();
             } 
-            else if (worst) return -1; //we dont have any smaller values to use
+            else if (isMostPlays) return -1; //we dont have any smaller values to use
             else orderedValues.removeFirst(); //value too big, go to next
         }
         return target == 0 ? count : -1;
@@ -86,44 +77,45 @@ public class GreedyCheatyPetey {
         int ruleCard = scanner.nextInt();
         int target = ruleCard * 21;
         int numberOfDifferentCardValues = scanner.nextInt();
-        var valuesAvailable = new MultiSet<Integer>();
+        var cardsAvailable = new MultiSet<Integer>();
         for (int i = 0; i < numberOfDifferentCardValues; i++) {
-            valuesAvailable.add(scanner.nextInt(), 1);
+            cardsAvailable.add(scanner.nextInt(), 1);
         }
 
         // Only 1 of each card
         if (ruleCard == 3)
         {
-            var result = greed(valuesAvailable, target, false, true);
+            var result = greed(cardsAvailable, target, false, true);
             System.out.println(result == -1 ? "Impossible" : result);
         }
         // Only 5 of each card
         else if (ruleCard == 5) {
-            for (var value : valuesAvailable) {
-                valuesAvailable.add(value, 4);
+            for (var value : cardsAvailable) {
+                cardsAvailable.add(value, 4);
             }
-            var result = greed(valuesAvailable, target, false, true);
+            var result = greed(cardsAvailable, target, false, true);
             System.out.println(result == -1 ? "Impossible" : result);
 
         }
         //max 6 of each and worst
         else if (ruleCard == 6) {
-            for (var value : valuesAvailable) {
-                valuesAvailable.add(value, 5);
+            for (var value : cardsAvailable) {
+                cardsAvailable.add(value, 5);
             }
-            var result = greed(valuesAvailable, target, true, true);
+            var result = greed(cardsAvailable, target, true, true);
             System.out.println(result == -1 ? "Impossible" : result);
         }
         // ODD: lowest amount of cards
         else if (ruleCard % 2 == 1) {
-            var result = greed(valuesAvailable, target, false, false);
+            var result = greed(cardsAvailable, target, false, false);
             System.out.println(result == -1 ? "Impossible" : result);
         }
         //Take as many as possible
         else if (ruleCard % 2 == 0) {
-            var result = greed(valuesAvailable, target, true, false);
+            var result = greed(cardsAvailable, target, true, false);
             System.out.println(result == -1 ? "Impossible" : result);
 
-        } 
+        }
+        scanner.close();
     }
 }

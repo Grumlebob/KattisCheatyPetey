@@ -24,7 +24,7 @@ public class WithoutMemoization {
         return best;
     }
 
-    private static int calculate(ArrayList<Integer> cardSet, int target, boolean isMostPlays) {
+    private static int calculateBestPlays(ArrayList<Integer> cardSet, int target, boolean isMostPlays) {
         int result = recursive(cardSet, target, isMostPlays);
         return result;
     }
@@ -43,13 +43,13 @@ public class WithoutMemoization {
 
         // ODD: lowest amount of cards
         if (ruleCard % 2 == 1) {
-            var result = calculate(cardSet, target, false);
+            var result = calculateBestPlays(cardSet, target, false);
             System.out.println(result == Integer.MAX_VALUE ? "Impossible" : result);
         }
 
         // EVEN: highest amount of cards
         else if (ruleCard % 2 == 0) {
-            var result = calculate(cardSet, target, true);
+            var result = calculateBestPlays(cardSet, target, true);
             System.out.println(result == Integer.MIN_VALUE ? "Impossible" : result);
 
         }

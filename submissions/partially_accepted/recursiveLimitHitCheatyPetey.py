@@ -46,39 +46,39 @@ for _ in range(numberOfDifferentCardValues):
     valuesAvailable.add(int(input()), 1)
 
 
-def bestToTarget(availableValues: Multiset, target, worst=False):  # unlimited cards only
-    if (availableValues, target) in cachedAnswers:
-        return cachedAnswers[(availableValues, target)]
+def calculateBestPlays(cardSet: Multiset, target, isMostPlays=False):  # unlimited cards only
+    if (cardSet, target) in cachedAnswers:
+        return cachedAnswers[(cardSet, target)]
     if target == 0:
         return 0
     elif target < 0:
-        return MIN if worst else MAX
-    best = max if worst else min
-    res = MIN if worst else MAX
-    for v, _ in availableValues.items.items():
-        newValues = availableValues
-        pre = bestToTarget(newValues, target - v, worst)
+        return MIN if isMostPlays else MAX
+    best = max if isMostPlays else min
+    res = MIN if isMostPlays else MAX
+    for v, _ in cardSet.items.items():
+        newValues = cardSet
+        pre = calculateBestPlays(newValues, target - v, isMostPlays)
         res = best(res, pre + 1)
-    cachedAnswers[(availableValues, target)] = res
+    cachedAnswers[(cardSet, target)] = res
     return res
 
 
-def bottumUp(availableValues: Multiset, target, worst=False):  # limited cards only
-    result = [MIN] * (target+1) if worst else [MAX] * (target+1)
-    valuesAvailableAt: list[Multiset] = []
+def bottumUp(cardSet: Multiset, target, isMostPlays=False):  # limited cards only
+    memoization = [MIN] * (target+1) if isMostPlays else [MAX] * (target+1)
+    valuesAvailable: list[Multiset] = []
     for _ in range(target + 1):
-        valuesAvailableAt.append(Multiset())
-    result[0] = 0
-    valuesAvailableAt[0] = availableValues
+        valuesAvailable.append(Multiset())
+    memoization[0] = 0
+    valuesAvailable[0] = cardSet
     for tempTarget in range(1, target + 1):
-        for v, _ in availableValues.items.items():
-            if v > tempTarget or valuesAvailableAt[tempTarget - v].numberOf(v) == 0:
+        for v, _ in cardSet.items.items():
+            if v > tempTarget or valuesAvailable[tempTarget - v].numberOf(v) == 0:
                 continue
-            if worst and result[tempTarget - v] + 1 > result[tempTarget] or not worst and result[tempTarget - v] + 1 < result[tempTarget]:
-                result[tempTarget] = result[tempTarget - v] + 1
-                valuesAvailableAt[tempTarget] = valuesAvailableAt[tempTarget - v].copy()
-                valuesAvailableAt[tempTarget].remove(v, 1)
-    return result[target]
+            if isMostPlays and memoization[tempTarget - v] + 1 > memoization[tempTarget] or not isMostPlays and memoization[tempTarget - v] + 1 < memoization[tempTarget]:
+                memoization[tempTarget] = memoization[tempTarget - v] + 1
+                valuesAvailable[tempTarget] = valuesAvailable[tempTarget - v].copy()
+                valuesAvailable[tempTarget].remove(v, 1)
+    return memoization[target]
 
 # One of each card
 if ruleCard == 3:
@@ -101,10 +101,10 @@ elif ruleCard == 6:
 
 # EVEN: highest amount of cards
 elif ruleCard % 2 == 0:
-    result = bestToTarget(valuesAvailable, target, True)
+    result = calculateBestPlays(valuesAvailable, target, True)
     print("Impossible" if result == MIN else result)
 
 # ODD: lowest amount of cards
 elif ruleCard % 2 == 1:
-    result = bestToTarget(valuesAvailable, target)
+    result = calculateBestPlays(valuesAvailable, target)
     print("Impossible" if result == MAX else result)

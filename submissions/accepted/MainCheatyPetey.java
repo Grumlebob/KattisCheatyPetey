@@ -52,7 +52,7 @@ public class MainCheatyPetey {
 
     private static int bottomUp(MultiSet<Integer> cardSet, int target, boolean isMostPlays,
             boolean isPlaysLimited) {
-        int[] dp = new int[target + 1];
+        int[] memoization = new int[target + 1];
         @SuppressWarnings("unchecked")
         MultiSet<Integer>[] cardsAvailable = new MultiSet[target + 1];
         // only used if isAmountOfCardsLimited == true
@@ -61,22 +61,22 @@ public class MainCheatyPetey {
         }
         cardsAvailable[0] = cardSet.clone();
         // It takes us 0 cards to get to 0
-        dp[0] = 0;
+        memoization[0] = 0;
         for (int currentTarget = 1; currentTarget <= target; currentTarget++) {
             // Initialize every current best solution to the Max/Min int,
             // which is the worst possible solution
-            dp[currentTarget] = isMostPlays ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            memoization[currentTarget] = isMostPlays ? Integer.MIN_VALUE : Integer.MAX_VALUE;
             for (int cardValue : cardSet) {
                 // So we don't overdraw
-                if (currentTarget - cardValue < 0 || dp[currentTarget - cardValue] == Integer.MAX_VALUE
-                        || dp[currentTarget - cardValue] == Integer.MIN_VALUE
+                if (currentTarget - cardValue < 0 || memoization[currentTarget - cardValue] == Integer.MAX_VALUE
+                        || memoization[currentTarget - cardValue] == Integer.MIN_VALUE
                         || isPlaysLimited && cardsAvailable[currentTarget - cardValue].numberOf(cardValue) == 0) {
                     continue;
                 }
                 // If we can beat current best solution, update it.
-                if (isMostPlays && dp[currentTarget] < dp[currentTarget - cardValue] + 1
-                        || !isMostPlays && dp[currentTarget] > dp[currentTarget - cardValue] + 1) {
-                    dp[currentTarget] = dp[currentTarget - cardValue] + 1;
+                if (isMostPlays && memoization[currentTarget] < memoization[currentTarget - cardValue] + 1
+                        || !isMostPlays && memoization[currentTarget] > memoization[currentTarget - cardValue] + 1) {
+                    memoization[currentTarget] = memoization[currentTarget - cardValue] + 1;
                     // If we are limited in amount of cards, remove the card we just used.
                     if (isPlaysLimited) {
                         cardsAvailable[currentTarget] = cardsAvailable[currentTarget - cardValue]
@@ -86,7 +86,7 @@ public class MainCheatyPetey {
                 }
             }
         }
-        return dp[target];
+        return memoization[target];
     }
 
     public static void main(String[] args) {
